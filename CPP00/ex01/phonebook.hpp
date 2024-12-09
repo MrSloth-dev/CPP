@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:57:57 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/09/24 00:09:27 by joao-pol         ###   ########.fr       */
+/*   Updated: 2024/12/03 09:59:58 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define PHONEBOOK_HPP_
 
 #include "contact.hpp"
+#include <iostream>
 
 class Phonebook
 {
@@ -22,9 +23,8 @@ class Phonebook
 		int		_index;
 	public:
 		Phonebook(void);
-		~Phonebook(void);
 		void	add(Contact contact);
-		void	search(Contact contact);
+		void	search(std::string str);
 		void	print(Contact contact);
 		Contact	get_contact(int index);
 };
