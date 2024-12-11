@@ -37,28 +37,14 @@ std::string Format(std::string str)
 	return (formatted.str());
 }
 
-void Phonebook::search(std::string str)
+void Phonebook::search(int index)
 {
-	int found = 0;
-	for (int i = 0; i < 8; i++)
-	{
-		if (str.compare(this->_contacts[i].get_first_name()) == 0
-			||str.compare(this->_contacts[i].get_last_name()) == 0
-			||str.compare(this->_contacts[i].get_phone_number()) == 0)
-		{
-			std::cout << "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| " << std::endl;
-			// std::cout << "|                                                      |" << std::endl;
-			std::cout << "|"<<Format(this->_contacts[i].get_first_name());
-			std::cout << "|"<<Format(this->_contacts[i].get_last_name());
-			std::cout << "|"<<Format(this->_contacts[i].get_nickname());
-			std::cout << "|"<<Format(this->_contacts[i].get_phone_number());
-			std::cout << "|"<<Format(this->_contacts[i].get_darkest_secret())<< "|" << std::endl;
-			std::cout << "|______________________________________________________| " << std::endl;
-			found++;
-		}
-	}
-	if (!found)
-		std::cout << "No contacts found!" << std::endl;
+	std::cout << "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| " << std::endl;
+	std::cout << "|"<<Format(this->_contacts[index].get_first_name());
+	std::cout << "|"<<Format(this->_contacts[index].get_last_name());
+	std::cout << "|"<<Format(this->_contacts[index].get_nickname());
+	std::cout << "|"<<Format(this->_contacts[index].get_phone_number()) << "|"<< std::endl;
+	std::cout  <<"|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| " << std::endl;
 }
 
 Contact Phonebook::get_contact(int index)

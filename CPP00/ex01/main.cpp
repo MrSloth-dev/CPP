@@ -11,21 +11,31 @@
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
+#include <cctype>
+#include <string>
+#include <sstream>
 
 void	ft_display()
 {
-	std::cout << " ___________________________________________________ " << std::endl;
-	std::cout << "|  Welcome to 90's Phonebook                        |" << std::endl;
-	std::cout << "|___________________________________________________|" << std::endl;
-	std::cout << "|  1-> Add Contact                                  |" << std::endl;
-	std::cout << "|___________________________________________________|" << std::endl;
-	std::cout << "|  2-> Search Contact                               |" << std::endl;
-	std::cout << "|___________________________________________________|" << std::endl;
-	std::cout << "|  3-> View all Contacts                            |" << std::endl;
-	std::cout << "|___________________________________________________|" << std::endl;
-	std::cout << "|  4-> Exit                                         |" << std::endl;
-	std::cout << "|___________________________________________________|" << std::endl;
+	std::cout << " ___________________________________________ " << std::endl;
+	std::cout << "|  Welcome to 90's Phonebook                |" << std::endl;
+	std::cout << "|___________________________________________|" << std::endl;
+	std::cout << "|  1-> Add Contact                          |" << std::endl;
+	std::cout << "|___________________________________________|" << std::endl;
+	std::cout << "|  2-> Search Contact                       |" << std::endl;
+	std::cout << "|___________________________________________|" << std::endl;
+	std::cout << "|  3-> View all Contacts                    |" << std::endl;
+	std::cout << "|___________________________________________|" << std::endl;
+	std::cout << "|  4-> Exit                                 |" << std::endl;
+	std::cout << "|___________________________________________|" << std::endl;
 	std::cout << "Type your option : ";
+}
+
+void	getPrompt(std::string msg, std::string &var)
+{
+	std::cout << msg;
+	std::getline(std::cin, var);
+	std::cout << std::endl;
 }
 
 Contact	ft_create_contact()
@@ -38,28 +48,40 @@ Contact	ft_create_contact()
 	std::string secret;
 
 	std::cout << "Add Contact : "<< std::endl;
-	std::cout << std::endl << "First Name : ";
-	std::cin >> firstname;
+	getPrompt("First Name : ", firstname);
 	temp.set_first_name(firstname);
-	std::cout << std::endl << "Last Name : ";
-	std::cin >> lastname;
+	getPrompt("Last Name : ", lastname);
 	temp.set_last_name(lastname);
-	std::cout << std::endl << "Phone Number : ";
-	std::cin >> phone;
+	getPrompt("Phone Number : ", phone);
 	temp.set_phone_number(phone);
-	std::cout << std::endl << "NickName : ";
-	std::cin >> nickname;
+	getPrompt("NickName : ", nickname);
 	temp.set_nickname(nickname);
-	std::cout << std::endl << "Darkest Secret : ";
-	std::cin >> secret;
+	getPrompt("Darkest Secret : ", secret);
 	temp.set_darkest_secret(secret);
 	return (temp);
 }
+
+int	stoi(std::string & s)
+{
+	int	i;
+	std::istringstream(s) >> i;
+	return i;
+}
+bool isNumber(std::string str)
+{
+	for (int i = 0; i < (int)str.length() ;i++)
+	{
+		if (std::isdigit(str[i]) == 0)
+			return 0;
+	}
+	return 1;
+}
+
 int	main()
 {
 	Phonebook phonebook;
 	Contact jao;
-	int	option = 1;
+	int	option = 0;
 
 	while (1)
 	{
@@ -74,31 +96,36 @@ int	main()
 				temp = ft_create_contact();
 				phonebook.add(temp);
 			}
-			if (option == 2)
+			else if (option == 2)
 			{
 				std::string temp;
 				std::cout << "Search : ";
-				std::cin >> temp;
+				std::getline(std::cin, temp, '\n');
 				std::cout << std::endl;
-				std::cout << " ______________________________________________________ " << std::endl;
-				std::cout << "|  Results found                                       |" << std::endl;
-				phonebook.search(temp);
-				std::cout << "Press Enter key to continue ..." << std::endl;
+				std::cout << " ___________________________________________ " << std::endl;
+				std::cout << "|  Results found                            |" << std::endl;
+				if (isNumber(temp) == 1 && stoi(temp) < 8 && stoi(temp) >= 0)
+					phonebook.search(stoi(temp));
+				else
+					std::cout << "Invalid Index" << std::endl;
 
 			}
-			if (option == 3)
+			else if (option == 3)
 			{
 				std::string temp;
-				std::cout << " _______________________________________________________ " << std::endl;
-				std::cout << "|  Show all results                                    |" << std::endl;
-				std::cout << "|______________________________________________________|" << std::endl;
+				std::cout << " ___________________________________________ " << std::endl;
+				std::cout << "|  Show all results                         |" << std::endl;
+				std::cout << "|___________________________________________|" << std::endl;
 				std::cout << "Showing all contacts : " << std::endl;
 				for (int i = 0; i < 8; i++)
-					phonebook.search(phonebook.get_contact(i).get_first_name());
+					phonebook.search(i);
 
 			}
-			if (option == 4){std::cout << "Exiting.. Thank you!" << std::endl; return (0);}
-		} while (option == 1 || option == 2 || option == 3 || option == 4);
+			else
+				std::cout << "Invalid input." << std::endl;
+			std::cin.clear();
+		} while (option != 4);
+		std::cout << "Exiting.. Thank you!" << std::endl; return (0);
 	}
 	// jao.set_first_name("Joao");
 	// jao.set_last_name("Barbosa");

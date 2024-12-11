@@ -15,6 +15,8 @@
 
 #include "contact.hpp"
 #include <iostream>
+#include <string>
+#include <cstdlib>
 
 class Phonebook
 {
@@ -24,7 +26,7 @@ class Phonebook
 	public:
 		Phonebook(void);
 		void	add(Contact contact);
-		void	search(std::string str);
+		void	search(int index);
 		void	print(Contact contact);
 		Contact	get_contact(int index);
 };

@@ -30,4 +30,7 @@ fclean :
 
 re : fclean all
 
+va : re
+	valgrind -q --leak-check=full ./phonebook
+
 .PHONY : all fclean re
