@@ -14,6 +14,7 @@
 #include <cctype>
 #include <string>
 #include <sstream>
+#include <limits>
 
 void	ft_display()
 {
@@ -46,7 +47,7 @@ Contact	ft_create_contact()
 	std::string nickname;
 	std::string phone;
 	std::string secret;
-
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cout << "Add Contact : "<< std::endl;
 	getPrompt("First Name : ", firstname);
 	temp.set_first_name(firstname);
@@ -90,6 +91,7 @@ int	main()
 			// std::cout << "\033[2J";
 			ft_display();
 			std::cin >> option;
+			std::cin.clear();
 			if (option == 1)
 			{
 				Contact temp;
@@ -99,6 +101,7 @@ int	main()
 			else if (option == 2)
 			{
 				std::string temp;
+				getPrompt("Search : ", temp);
 				std::cout << "Search : ";
 				std::getline(std::cin, temp, '\n');
 				std::cout << std::endl;
