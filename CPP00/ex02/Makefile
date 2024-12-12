@@ -12,15 +12,15 @@
 
 CC = c++
 NAME = phonebook
-SRCS = main.cpp contact.cpp phonebook.cpp utils.cpp
+SRCS = main.cpp contact.cpp phonebook.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
-# OBJS = $(SRCS:.cpp=.o)
+OBJS = $(SRCS:.cpp=.o)
 
 
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -31,6 +31,6 @@ fclean :
 re : fclean all
 
 va : re
-	valgrind --leak-check=full --show-leak-kinds=all ./phonebook
+	valgrind --leak-check=full ./phonebook
 
 .PHONY : all fclean re

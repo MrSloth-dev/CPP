@@ -6,37 +6,24 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:59:34 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/12/03 10:44:30 by joao-pol         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:14:26 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
-#include <cctype>
-#include <string>
-#include <sstream>
-#include <limits>
 
-void	ft_display()
-{
-	std::cout << " ___________________________________________ " << std::endl;
-	std::cout << "|  Welcome to 90's Phonebook                |" << std::endl;
-	std::cout << "|___________________________________________|" << std::endl;
-	std::cout << "|  1-> Add Contact                          |" << std::endl;
-	std::cout << "|___________________________________________|" << std::endl;
-	std::cout << "|  2-> Search Contact                       |" << std::endl;
-	std::cout << "|___________________________________________|" << std::endl;
-	std::cout << "|  3-> View all Contacts                    |" << std::endl;
-	std::cout << "|___________________________________________|" << std::endl;
-	std::cout << "|  4-> Exit                                 |" << std::endl;
-	std::cout << "|___________________________________________|" << std::endl;
-	std::cout << "Type your option : ";
-}
 
-void	getPrompt(std::string msg, std::string &var)
+bool	getPrompt(std::string msg, std::string &var)
 {
 	std::cout << msg;
 	std::getline(std::cin, var);
+	if (std::cin.eof() || std::cin.fail() )
+	{
+		std::cout << std::endl <<"You pressed Ctrl + D, Program is Quitting" << std::endl;
+		return false;
+	}
 	std::cout << std::endl;
+	return true;
 }
 
 Contact	ft_create_contact()
@@ -47,93 +34,80 @@ Contact	ft_create_contact()
 	std::string nickname;
 	std::string phone;
 	std::string secret;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	std::cout << "Add Contact : "<< std::endl;
+	std::cout << "Please enter contact details : "<< std::endl;
 	getPrompt("First Name : ", firstname);
-	temp.set_first_name(firstname);
+	if (firstname.length() == 0)
+		return temp;
 	getPrompt("Last Name : ", lastname);
-	temp.set_last_name(lastname);
-	getPrompt("Phone Number : ", phone);
-	temp.set_phone_number(phone);
+	if (lastname.length() == 0)
+		return temp;
+	while (getPrompt("Phone Number : ", phone) && ((isNumber(phone) == 0 || phone.length() != 9))) {
+		std::cout << "Phone number not valid. Must have 9 digits"<< std::endl;
+		sleep(1);
+		std::cout << "Please try again."<< std::endl;
+		sleep(1);
+	}
+	if (phone.length() == 0)
+		return temp;
 	getPrompt("NickName : ", nickname);
-	temp.set_nickname(nickname);
+	if (nickname.length() == 0)
+		return temp;
 	getPrompt("Darkest Secret : ", secret);
+	if (secret.length() == 0)
+		return temp;
+	temp.set_first_name(firstname);
+	temp.set_last_name(lastname);
+	temp.set_phone_number(phone);
+	temp.set_nickname(nickname);
 	temp.set_darkest_secret(secret);
 	return (temp);
-}
-
-int	stoi(std::string & s)
-{
-	int	i;
-	std::istringstream(s) >> i;
-	return i;
-}
-bool isNumber(std::string str)
-{
-	for (int i = 0; i < (int)str.length() ;i++)
-	{
-		if (std::isdigit(str[i]) == 0)
-			return 0;
-	}
-	return 1;
 }
 
 int	main()
 {
 	Phonebook phonebook;
-	Contact jao;
-	int	option = 0;
 
+	handleSignal();
+	std::cout << "\033[2J\033[H";
+	std::string input;
 	while (1)
 	{
 		do
 		{
-			// std::cout << "\033[2J";
 			ft_display();
-			std::cin >> option;
-			std::cin.clear();
-			if (option == 1)
+			if (!getPrompt("Type your option : ", input))
+				break;
+			if (std::cin.fail()){
+				std::cout << "Invalid input. Please enter ADD, SEARCH or EXIT" << std::endl, sleep(1);
+				continue;
+			}
+			else if (input == "ADD")
 			{
 				Contact temp;
 				temp = ft_create_contact();
+				if (!std::cin.eof() && temp.get_first_name().length() == 0) {
+					std::cout << "All contact field must be filled" << std::endl;
+					continue;
+				}
 				phonebook.add(temp);
 			}
-			else if (option == 2)
+			else if (input == "SEARCH")
 			{
 				std::string temp;
-				getPrompt("Search : ", temp);
-				std::cout << "Search : ";
-				std::getline(std::cin, temp, '\n');
-				std::cout << std::endl;
-				std::cout << " ___________________________________________ " << std::endl;
-				std::cout << "|  Results found                            |" << std::endl;
+				getPrompt("Search [0 .. 7]: ", temp);
 				if (isNumber(temp) == 1 && stoi(temp) < 8 && stoi(temp) >= 0)
+				{
+					std::cout << "Searching ..." << std::endl;
 					phonebook.search(stoi(temp));
+				}
 				else
-					std::cout << "Invalid Index" << std::endl;
-
+					std::cout << "Invalid Index, choose between 0 and 7" << std::endl;
 			}
-			else if (option == 3)
-			{
-				std::string temp;
-				std::cout << " ___________________________________________ " << std::endl;
-				std::cout << "|  Show all results                         |" << std::endl;
-				std::cout << "|___________________________________________|" << std::endl;
-				std::cout << "Showing all contacts : " << std::endl;
-				for (int i = 0; i < 8; i++)
-					phonebook.search(i);
-
-			}
+			else if (input == "EXIT")
+				break ;
 			else
-				std::cout << "Invalid input." << std::endl;
-			std::cin.clear();
-		} while (option != 4);
+				std::cout << "Invalid input." << std::endl, sleep(1);
+		} while (input != "EXIT" && !std::cin.eof());
 		std::cout << "Exiting.. Thank you!" << std::endl; return (0);
 	}
-	// jao.set_first_name("Joao");
-	// jao.set_last_name("Barbosa");
-	// jao.set_phone_number("917325972");
-	// phonebook.add(jao);
-	// phonebook.search("Joao");
-
 }
