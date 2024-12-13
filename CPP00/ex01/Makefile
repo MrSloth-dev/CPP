@@ -14,7 +14,7 @@ CC = c++
 NAME = phonebook
 SRCS = main.cpp contact.cpp phonebook.cpp utils.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
-# OBJS = $(SRCS:.cpp=.o)
+OBJS = $(SRCS:.cpp=.o)
 
 
 all : $(NAME)
@@ -25,7 +25,10 @@ $(NAME): $(OBJS)
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-fclean :
+clean :
+	rm -fr *.o
+
+fclean : clean
 	rm -fr $(NAME)
 
 re : fclean all

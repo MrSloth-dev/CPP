@@ -1,18 +1,6 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/03 09:59:30 by joao-pol          #+#    #+#              #
-#    Updated: 2024/12/03 10:07:25 by joao-pol         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC = c++
-NAME = phonebook
-SRCS = main.cpp contact.cpp phonebook.cpp
+NAME = account
+SRCS = tests.cpp Account.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 
@@ -31,6 +19,6 @@ fclean :
 re : fclean all
 
 va : re
-	valgrind --leak-check=full ./phonebook
+	valgrind --leak-check=full ./acount
 
 .PHONY : all fclean re
