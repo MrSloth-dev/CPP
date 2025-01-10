@@ -36,4 +36,4 @@ re : fclean all
 va : re
 	valgrind --leak-check=full --show-leak-kinds=all ./phonebook
 
-.PHONY : all fclean re
+.PHONY : all fclean re va
