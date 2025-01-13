@@ -58,12 +58,3 @@ Contact Phonebook::get_contact(int index)
 {
 	return (this->_contacts[index]);
 }
-
-std::string FormatColumn(std::string& str)
-{
-	if (str.length() > 10)
-		return str.substr(0, 9) + '.';
-	std::ostringstream formatted;
-	formatted << std::right << std::setw(10) << str;
-	return (formatted.str());
-}

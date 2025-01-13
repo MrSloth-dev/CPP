@@ -22,13 +22,22 @@ void	handleSignal(void)
 
 int	stoi(std::string & s)
 {
-	int	i;
-	std::istringstream(s) >> i;
+	int	i = 0;
+	try {
+		std::istringstream iss(s);
+		if (!(iss >> i))
+			return -1;
+	}
+	catch (...) {
+		return -1;
+	}
 	return i;
 }
 
 bool isNumber(std::string str)
 {
+	if (str.empty())
+		return false;
 	for (int i = 0; i < (int)str.length() ;i++)
 	{
 		if (std::isdigit(str[i]) == 0)
