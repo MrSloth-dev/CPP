@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = zig c++
+CC = c++
 NAME = Account
 SRCS = Account.cpp tests.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g

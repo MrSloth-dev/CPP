@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Account.hpp"
+#include <iomanip>
 #include <iostream>
 #include <ctime>
 
@@ -63,18 +64,26 @@ void	Account::displayAccountsInfos( void )
 
 }
 
-void	_displayTimeSpamp(void)
+void	Account::_displayTimestamp(void)
 {
 	time_t now = time(NULL);
     struct std::tm* localTime = localtime(&now);
-	int	year = localTime->tm_year;
-	int	mon= localTime->tm_mon;
+	int	year = localTime->tm_year + 1900;
+	int	mon= localTime->tm_mon + 1;
 	int	day = localTime->tm_mday;
-    float hour = localTime->tm_hour;
-    float min = localTime->tm_min;
-    float sec = localTime->tm_sec;
-	std::cout << '[' <<year <<mon << day << '_' << hour << min
-		<< sec << "] " << std::endl;
+	float hour = localTime->tm_hour;
+	float min = localTime->tm_min;
+	float sec = localTime->tm_sec;
+	std::cout << "["
+		<< std::setfill('0') << std::setw(4) << year
+		<< std::setfill('0') << std::setw(2) << mon
+		<< std::setfill('0') << std::setw(2) << day
+		<< '_'
+		<< std::setfill('0') << std::setw(2) << hour
+		<< std::setfill('0') << std::setw(2) << min
+		<< std::setfill('0') << std::setw(2) << sec
+		<< std::setfill('0') << std::setw(2) << "] "
+		<< std::endl;
 }
 
 // ~Account( void );
@@ -82,7 +91,7 @@ void	_displayTimeSpamp(void)
 void	Account::makeDeposit( int deposit )
 {
 	if (deposit < 0) {
-		std::cerr << "Bad deposit value" <<std::endl;
+		std::cout << "index:" <<_accountIndex << ";amount:" <<_amount << "deposit:refused" << std::endl;
 		return ;
 	}
 	else
@@ -95,14 +104,15 @@ bool	Account::makeWithdrawal( int withdrawal )
 {
 	_displayTimestamp();
 	if (withdrawal < 0 || withdrawal > this->_totalAmount) {
-		std::cerr << "Bad withdrawal value" <<std::endl;
-		std::cout << "index:" <<_accountIndex << ";amount:" <<_amount << ";closed" << std::endl;
+		std::cout << "index:" <<_accountIndex << ";amount:" <<_amount << "withdrawal:refused" << std::endl;
 		return false ;
 	}
 	else
 	{
-		this->_totalNbWithdrawals++;
-		this->_totalAmount += withdrawal;
+		this->_nbWithdrawals++;
+		_totalNbWithdrawals++;
+		this->_amount -= withdrawal;
+		std::cout << "index:" <<_accountIndex << ";amount:" <<_amount << "withdrawal:" << this->_nbWithdrawals << std::endl;
 		return true ;
 	}
 
