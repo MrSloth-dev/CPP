@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 CC = c++
-NAME = Account
-SRCS = Account.cpp tests.cpp
+NAME = Zombie
+SRCS = main.cpp Zombie.cpp newZombie.cpp
 CFLAGS = -Wall  -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
+#include <iomanip>
 
 
 bool	getPrompt(std::string msg, std::string &var)
@@ -63,6 +64,7 @@ Contact	ft_create_contact()
 	return (temp);
 }
 
+
 int	main()
 {
 	Phonebook phonebook;
@@ -92,17 +94,7 @@ int	main()
 				phonebook.add(temp);
 			}
 			else if (input == "SEARCH")
-			{
-				std::string temp;
-				getPrompt("Search [0 .. 7]: ", temp);
-				if (isNumber(temp) == 1 && stoi(temp) < 8 && stoi(temp) >= 0)
-				{
-					std::cout << "Searching ..." << std::endl;
-					phonebook.search(stoi(temp));
-				}
-				else
-					std::cout << "Invalid Index, choose between 0 and 7" << std::endl;
-			}
+				phonebook.search();
 			else if (input == "EXIT")
 				break ;
 			else

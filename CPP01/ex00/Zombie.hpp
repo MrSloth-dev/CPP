@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact.hpp                                        :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 22:08:31 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/12/03 10:06:59 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/01/20 15:37:32 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/20 15:57:19 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef _ZOMBIE_HPP
+# define _ZOMBIE_HPP
+#include <string>
+#include <iostream>
 
-#ifndef CONTACT_HPP_
-#define CONTACT_HPP_
+class Zombie {
+	private:
+		std::string _name;
+	public:
+		void	announce(void);
+		Zombie(void);
+		Zombie(std::string name);
+		~Zombie(void);
 
-# include <string>
+};
+
 
 class Contact
 {

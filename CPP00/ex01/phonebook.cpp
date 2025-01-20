@@ -37,21 +37,62 @@ std::string Format(std::string str)
 	return (formatted.str());
 }
 
-void Phonebook::search(int index)
+int	ft_search_ui(Contact contacts[8])
 {
-	if (this->_contacts[index].get_first_name().length() == 0)
-		std::cout << "No contact Found!" << std::endl;
+	std::cout << " ___________________________________________ " << std::endl;
+	std::cout << "|  Details of contact found                 |" << std::endl;
+	std::cout << "|    Index | Last_name|First_name| Nickname | " << std::endl;
+	std::cout << "|----------|----------|----------|----------| " << std::endl;
+	if (contacts[0].get_first_name().length() == 0)
+	{
+		std::cout << "|  No contacts found...                     |" << std::endl;
+		std::cout << "|___________________________________________|" << std::endl;
+		return (0);
+	}
+	for (int i = 0; i < 8 && contacts[i].get_first_name().length() != 0; i++)
+	{
+		std::cout << "|" << std::setw(10) << i
+			<< "|" << Format(contacts[i].get_first_name())
+			<< "|" << Format(contacts[i].get_last_name())
+			<< "|" << Format(contacts[i].get_nickname()) << "|"<< std::endl;
+		if (i + 1 < 8 && contacts[i + 1].get_first_name().length() != 0)
+			std::cout <<"|-------------------------------------------| " << std::endl;
+		else
+			std::cout <<"|___________________________________________| " << std::endl;
+	}
+	return (1);
+}
+
+void Phonebook::search()
+{
+	std::string temp;
+
+	if (!ft_search_ui(this->_contacts))
+		return ;
+	getPrompt("Search [0 .. 7]: ", temp);
+	if (isNumber(temp) == 1 && stoi(temp) < 8 && stoi(temp) >= 0)
+		std::cout << "Searching ..." << std::endl;
 	else
 	{
-		std::cout << " ___________________________________________ " << std::endl;
-		std::cout << "|  Details of contact found                 |" << std::endl;
-		std::cout << "|first_name|_last_name|phone_no.|__nickname_| " << std::endl;
-		std::cout << "|"<<Format(this->_contacts[index].get_first_name());
-		std::cout << "|"<<Format(this->_contacts[index].get_last_name());
-		std::cout << "|"<<Format(this->_contacts[index].get_nickname());
-		std::cout << "|"<<Format(this->_contacts[index].get_phone_number()) << "|"<< std::endl;
-		std::cout  <<"|___________________________________________| " << std::endl;
+		std::cout << "Invalid Index, choose between 0 and 7" << std::endl;
+		return ;
 	}
+	int index = stoi(temp);
+	std::cout << " ___________________________________________ " << std::endl;
+	std::cout << "|  Details of contact found                 |" << std::endl;
+	std::cout << "|    Index | Last_name|first_name| Nickname | " << std::endl;
+	std::cout << "|----------|----------|----------|----------| " << std::endl;
+	if (this->_contacts[index].get_first_name().length() == 0)
+	{
+		std::cout << "|  No contacts found in the index...        |" << std::endl;
+		std::cout << "|___________________________________________|" << std::endl;
+		return ;
+	}
+	std::cout << "|" << std::setfill(' ') << std::setw(10) << index;
+	std::cout << "|"<<Format(this->_contacts[index].get_first_name());
+	std::cout << "|"<<Format(this->_contacts[index].get_last_name());
+	std::cout << "|"<<Format(this->_contacts[index].get_nickname()) << "|"<< std::endl;
+	std::cout  <<"|___________________________________________| " << std::endl;
 }
 
 Contact Phonebook::get_contact(int index)

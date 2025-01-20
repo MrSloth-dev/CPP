@@ -31,8 +31,10 @@ class Phonebook
 	public:
 		Phonebook(void);
 		void	add(Contact contact);
-		void	search(int index);
+		void	search();
 		void	print(Contact contact);
 		Contact	get_contact(int index);
 };
+
+bool	getPrompt(std::string msg, std::string &var);
 #endif //PHONEBOOK_HPP_

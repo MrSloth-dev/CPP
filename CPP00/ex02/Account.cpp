@@ -86,8 +86,6 @@ void	Account::_displayTimestamp(void)
 		<< std::endl;
 }
 
-// ~Account( void );
-
 void	Account::makeDeposit( int deposit )
 {
 	if (deposit < 0) {
@@ -100,6 +98,7 @@ void	Account::makeDeposit( int deposit )
 		this->_totalAmount += deposit;
 	}
 }
+
 bool	Account::makeWithdrawal( int withdrawal )
 {
 	_displayTimestamp();
@@ -117,14 +116,17 @@ bool	Account::makeWithdrawal( int withdrawal )
 	}
 
 }
+
 int	Account::checkAmount( void ) const
 {
 	return (this->_totalAmount);
 }
+
 void	Account::displayStatus( void ) const
 {
 
 }
+
 Account::~Account(void)
 {
 	_displayTimestamp();

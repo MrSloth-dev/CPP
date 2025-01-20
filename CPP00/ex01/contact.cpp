@@ -37,6 +37,11 @@ void	Contact::set_darkest_secret(std::string str)
 	this->_darkest_secret = str;
 }
 
+std::string	Contact::get_index()
+{
+	return(this->_index);
+}
+
 std::string	Contact::get_first_name()
 {
 	return(this->_first_name);
