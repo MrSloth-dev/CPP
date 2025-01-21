@@ -6,13 +6,13 @@
 #    By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 09:59:30 by joao-pol          #+#    #+#              #
-#    Updated: 2024/12/03 10:07:25 by joao-pol         ###   ########.fr        #
+#    Updated: 2025/01/21 12:08:13 by joao-pol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 NAME = Zombie
-SRCS = main.cpp Zombie.cpp newZombie.cpp
+SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 CFLAGS = -Wall  -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 
@@ -34,6 +34,6 @@ fclean : clean
 re : fclean all
 
 va : re
-	valgrind --leak-check=full --show-leak-kinds=all ./phonebook
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 .PHONY : all fclean re

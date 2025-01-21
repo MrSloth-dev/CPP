@@ -12,9 +12,8 @@
 
 #include "Zombie.hpp"
 
-/* Zombie *newZombie(std::string name)
+Zombie *newZombie(std::string name)
 {
-	Zombie newZombie(name);
-
-	return newZombie;
-} */
+	Zombie *Zombie = new class Zombie(name);
+	return Zombie;
+}

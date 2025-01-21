@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 15:36:44 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/21 12:08:36 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/01/21 12:20:02 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/21 12:39:39 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-int	main()
+Zombie *zombieHorde(int N, std::string name)
 {
-	Zombie *PointerZombie;
-	PointerZombie = newZombie("Helder");
-	PointerZombie->announce();
-	randomChump("Orlando");
-	delete PointerZombie;
-	return (0);
-
-	
+	if (N <= 0)
+		return (NULL);
+	Zombie *horde = new Zombie[N];
+	for (int i = 0; i < N; i++)
+	{
+		horde[i].setName(name);
+		horde[i].announce();
+	}
+	return horde;
 }

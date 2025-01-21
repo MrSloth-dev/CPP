@@ -14,13 +14,13 @@
 #include <csignal>
 #include <sstream>
 
-void	handleSignal(void)
+void	HandleSignal(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 }
 
-int	stoi(std::string & s)
+int	Stoi(std::string & s)
 {
 	int	i = 0;
 	try {
@@ -34,7 +34,7 @@ int	stoi(std::string & s)
 	return i;
 }
 
-bool isNumber(std::string str)
+bool IsNumber(std::string str)
 {
 	if (str.empty())
 		return false;
@@ -46,7 +46,7 @@ bool isNumber(std::string str)
 	return true;
 }
 
-void	ft_display()
+void	Display()
 {
 	std::cout << " ___________________________________________ " << std::endl;
 	std::cout << "|  Welcome to 90's Phonebook                |" << std::endl;

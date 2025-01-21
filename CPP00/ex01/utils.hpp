@@ -17,8 +17,8 @@
 # include <csignal>
 # include <sstream>
 
-void	handleSignal(void);
-int		stoi(std::string & s);
-bool	isNumber(std::string str);
-void	ft_display(void);
+void	HandleSignal(void);
+int		Stoi(std::string & s);
+bool	IsNumber(std::string str);
+void	Display(void);
 #endif 

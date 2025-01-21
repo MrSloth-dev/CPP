@@ -37,11 +37,11 @@ std::string Format(std::string str)
 	return (formatted.str());
 }
 
-int	ft_search_ui(Contact contacts[8])
+int	SearchUi(Contact contacts[8])
 {
 	std::cout << " ___________________________________________ " << std::endl;
 	std::cout << "|  Details of contact found                 |" << std::endl;
-	std::cout << "|    Index | Last_name|First_name| Nickname | " << std::endl;
+	std::cout << "|    Index | First_name|Last_name| Nickname | " << std::endl;
 	std::cout << "|----------|----------|----------|----------| " << std::endl;
 	if (contacts[0].get_first_name().length() == 0)
 	{
@@ -67,17 +67,17 @@ void Phonebook::search()
 {
 	std::string temp;
 
-	if (!ft_search_ui(this->_contacts))
+	if (!SearchUi(this->_contacts))
 		return ;
-	getPrompt("Search [0 .. 7]: ", temp);
-	if (isNumber(temp) == 1 && stoi(temp) < 8 && stoi(temp) >= 0)
+	GetPrompt("Search [0 .. 7]: ", temp);
+	if (IsNumber(temp) == 1 && Stoi(temp) < 8 && Stoi(temp) >= 0)
 		std::cout << "Searching ..." << std::endl;
 	else
 	{
 		std::cout << "Invalid Index, choose between 0 and 7" << std::endl;
 		return ;
 	}
-	int index = stoi(temp);
+	int index = Stoi(temp);
 	std::cout << " ___________________________________________ " << std::endl;
 	std::cout << "|  Details of contact found                 |" << std::endl;
 	std::cout << "|    Index | Last_name|first_name| Nickname | " << std::endl;

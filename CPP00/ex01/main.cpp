@@ -14,7 +14,7 @@
 #include <iomanip>
 
 
-bool	getPrompt(std::string msg, std::string &var)
+bool	GetPrompt(std::string msg, std::string &var)
 {
 	std::cout << msg;
 	std::getline(std::cin, var);
@@ -27,7 +27,7 @@ bool	getPrompt(std::string msg, std::string &var)
 	return true;
 }
 
-Contact	ft_create_contact()
+Contact	CreateContact()
 {
 	Contact temp;
 	std::string firstname;
@@ -36,13 +36,16 @@ Contact	ft_create_contact()
 	std::string phone;
 	std::string secret;
 	std::cout << "Please enter contact details : "<< std::endl;
-	getPrompt("First Name : ", firstname);
+	GetPrompt("First Name : ", firstname);
 	if (firstname.length() == 0)
 		return temp;
-	getPrompt("Last Name : ", lastname);
+	GetPrompt("Last Name : ", lastname);
 	if (lastname.length() == 0)
 		return temp;
-	while (getPrompt("Phone Number : ", phone) && ((isNumber(phone) == 0 || phone.length() != 9))) {
+	GetPrompt("NickName : ", nickname);
+	if (nickname.length() == 0)
+		return temp;
+	while (GetPrompt("Phone Number : ", phone) && ((IsNumber(phone) == 0 || phone.length() != 9))) {
 		std::cout << "Phone number not valid. Must have 9 digits"<< std::endl;
 		sleep(1);
 		std::cout << "Please try again."<< std::endl;
@@ -50,10 +53,7 @@ Contact	ft_create_contact()
 	}
 	if (phone.length() == 0)
 		return temp;
-	getPrompt("NickName : ", nickname);
-	if (nickname.length() == 0)
-		return temp;
-	getPrompt("Darkest Secret : ", secret);
+	GetPrompt("Darkest Secret : ", secret);
 	if (secret.length() == 0)
 		return temp;
 	temp.set_first_name(firstname);
@@ -69,37 +69,35 @@ int	main()
 {
 	Phonebook phonebook;
 
-	handleSignal();
+	HandleSignal();
 	std::cout << "\033[2J\033[H";
 	std::string input;
-	while (1)
+	do
 	{
-		do
+		Display();
+		if (!GetPrompt("Type your option : ", input))
+			break;
+		if (std::cin.fail()){
+			std::cout << "Invalid input. Please enter ADD, SEARCH or EXIT" << std::endl, sleep(1);
+			continue;
+		}
+		else if (input == "ADD")
 		{
-			ft_display();
-			if (!getPrompt("Type your option : ", input))
-				break;
-			if (std::cin.fail()){
-				std::cout << "Invalid input. Please enter ADD, SEARCH or EXIT" << std::endl, sleep(1);
+			Contact temp;
+			temp = CreateContact();
+			if (!std::cin.eof() && temp.get_first_name().length() == 0) {
+				std::cout << "All contact field must be filled" << std::endl;
 				continue;
 			}
-			else if (input == "ADD")
-			{
-				Contact temp;
-				temp = ft_create_contact();
-				if (!std::cin.eof() && temp.get_first_name().length() == 0) {
-					std::cout << "All contact field must be filled" << std::endl;
-					continue;
-				}
-				phonebook.add(temp);
-			}
-			else if (input == "SEARCH")
-				phonebook.search();
-			else if (input == "EXIT")
-				break ;
-			else
-				std::cout << "Invalid input." << std::endl, sleep(1);
-		} while (input != "EXIT" && !std::cin.eof());
-		std::cout << "Exiting.. Thank you!" << std::endl; return (0);
-	}
+			phonebook.add(temp);
+		}
+		else if (input == "SEARCH")
+			phonebook.search();
+		else if (input == "EXIT")
+			break ;
+		else
+			std::cout << "Invalid input." << std::endl, sleep(1);
+	} while (input != "EXIT" && !std::cin.eof());
+	std::cout << "Exiting.. Thank you!" << std::endl;
+	return (0);
 }

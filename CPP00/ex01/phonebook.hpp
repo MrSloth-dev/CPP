@@ -36,5 +36,5 @@ class Phonebook
 		Contact	get_contact(int index);
 };
 
-bool	getPrompt(std::string msg, std::string &var);
+bool	GetPrompt(std::string msg, std::string &var);
 #endif //PHONEBOOK_HPP_

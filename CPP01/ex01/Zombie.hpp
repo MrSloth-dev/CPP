@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 15:36:44 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/21 12:08:36 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/01/20 15:37:32 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/21 12:35:53 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef _ZOMBIE_HPP
+# define _ZOMBIE_HPP
+#include <string>
+#include <iostream>
 
-#include "Zombie.hpp"
 
-int	main()
-{
-	Zombie *PointerZombie;
-	PointerZombie = newZombie("Helder");
-	PointerZombie->announce();
-	randomChump("Orlando");
-	delete PointerZombie;
-	return (0);
+class Zombie {
+	private:
+		std::string _name;
+	public:
+		Zombie(void);
+		Zombie(std::string name);
+		~Zombie(void);
+		void	announce(void);
+		void setName(std::string name);
 
-	
-}
+};
+
+Zombie *zombieHorde(int N, std::string name);
+
+#endif // _ZOMBIE_HPP
