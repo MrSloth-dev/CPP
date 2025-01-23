@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = zig c++
+CC = c++
 NAME = Violence
 SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 CFLAGS = -Wall  -Wextra -std=c++98 -g
