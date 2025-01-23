@@ -18,7 +18,6 @@ Weapon& Weapon::operator=(const Weapon &other)
 	return (*this);
 
 }
-Weapon::Weapon() {}
 
 Weapon::Weapon(std::string type) {
 	this->_type = type;

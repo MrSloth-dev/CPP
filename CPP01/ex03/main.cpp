@@ -31,5 +31,24 @@ int main()
 		club.setType("some other type of club");
 		jim.attack();
 	}
+	{
+		std::string wp = "404 Weapon not found";
+		Weapon club = Weapon(wp);
+		HumanB joel("Joel");
+		joel.setWeapon(club);
+		joel.attack();
+		club.setType("some other type of club");
+		joel.attack();
+	}
+	{
+		std::string wp = "404 Weapon not found";
+		Weapon club = Weapon(wp);
+		HumanB toni("Toni");
+		toni.setWeapon(club);
+		toni.attack();
+		club.setType("some other type of unknown");
+		toni.attack();
+		club.setType("some another type of unknown");
+	}
 	return 0;
 }

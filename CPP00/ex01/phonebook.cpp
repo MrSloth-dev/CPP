@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:59:46 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/12/12 17:03:42 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:43:51 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,21 @@ void Phonebook::search()
 		return ;
 	}
 	int index = Stoi(temp);
-	std::cout << " ___________________________________________ " << std::endl;
-	std::cout << "|  Details of contact found                 |" << std::endl;
-	std::cout << "|    Index | Last_name|first_name| Nickname | " << std::endl;
-	std::cout << "|----------|----------|----------|----------| " << std::endl;
+	std::cout << " ___________________________________________  " << std::endl;
+	std::cout << "|  Details of contact found                 | " << std::endl;
+	std::cout << "|___________________________________________| " << std::endl;
 	if (this->_contacts[index].get_first_name().length() == 0)
 	{
 		std::cout << "|  No contacts found in the index...        |" << std::endl;
 		std::cout << "|___________________________________________|" << std::endl;
 		return ;
 	}
-	std::cout << "|" << std::setfill(' ') << std::setw(10) << index;
-	std::cout << "|"<<Format(this->_contacts[index].get_first_name());
-	std::cout << "|"<<Format(this->_contacts[index].get_last_name());
-	std::cout << "|"<<Format(this->_contacts[index].get_nickname()) << "|"<< std::endl;
-	std::cout  <<"|___________________________________________| " << std::endl;
+	std::cout << "First name: " << this->_contacts[index].get_first_name() << std::endl;
+	std::cout << "Last name: " << this->_contacts[index].get_last_name() << std::endl;
+	std::cout << "Nickname: " << this->_contacts[index].get_nickname() << std::endl;
+	std::cout << "Phone number: " << this->_contacts[index].get_phone_number() << std::endl;
+	std::cout << "Darkest Secret: " << this->_contacts[index].get_darkest_secret() << std::endl;
+	std::cout << std::endl <<std::endl;
 }
 
 Contact Phonebook::get_contact(int index)

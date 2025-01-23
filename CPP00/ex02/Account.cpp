@@ -23,6 +23,7 @@ int	Account::_totalNbWithdrawals = 0;
 Account::Account( int initial_deposit )
 {
 	_displayTimestamp();
+	std::cout << "index:" <<_accountIndex << ";amount:" <<_amount << "created" << std::endl;
 	this->_accountIndex = _nbAccounts++;
 	this->_amount = initial_deposit;
 	this->_totalAmount += initial_deposit;
@@ -60,6 +61,11 @@ int	Account::getNbWithdrawals( void )
 
 void	Account::displayAccountsInfos( void )
 {
+	for (int i = 0; i < _nbAccounts; i++) {
+		_displayTimestamp();
+		std::cout << "index:" <<this->_accountIndex << ";amount:" <<this->_amount << "created" << std::endl;
+	}
+	
 
 
 }
@@ -82,14 +88,13 @@ void	Account::_displayTimestamp(void)
 		<< std::setfill('0') << std::setw(2) << hour
 		<< std::setfill('0') << std::setw(2) << min
 		<< std::setfill('0') << std::setw(2) << sec
-		<< std::setfill('0') << std::setw(2) << "] "
-		<< std::endl;
+		<< std::setfill('0') << std::setw(2) << "] ";
 }
 
 void	Account::makeDeposit( int deposit )
 {
 	if (deposit < 0) {
-		std::cout << "index:" <<_accountIndex << ";amount:" <<_amount << "deposit:refused" << std::endl;
+		std::cout << "index:" <<_accountIndex << ";amount:" <<this->_amount << "deposit:refused" << std::endl;
 		return ;
 	}
 	else
@@ -103,7 +108,7 @@ bool	Account::makeWithdrawal( int withdrawal )
 {
 	_displayTimestamp();
 	if (withdrawal < 0 || withdrawal > this->_totalAmount) {
-		std::cout << "index:" <<_accountIndex << ";amount:" <<_amount << "withdrawal:refused" << std::endl;
+		std::cout << "index:" <<_accountIndex << ";amount:" <<this->_amount << "withdrawal:refused" << std::endl;
 		return false ;
 	}
 	else
@@ -111,7 +116,7 @@ bool	Account::makeWithdrawal( int withdrawal )
 		this->_nbWithdrawals++;
 		_totalNbWithdrawals++;
 		this->_amount -= withdrawal;
-		std::cout << "index:" <<_accountIndex << ";amount:" <<_amount << "withdrawal:" << this->_nbWithdrawals << std::endl;
+		std::cout << "index:" <<this->_accountIndex << ";amount:" <<this->_amount << "withdrawal:" << this->_nbWithdrawals << std::endl;
 		return true ;
 	}
 

@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 16:41:13 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/21 17:25:20 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/01/23 16:33:55 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/23 16:34:46 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include <string>
+#include "Harl.hpp"
 
-class Weapon {
-private:
-	std::string _type;
-public:
-	const std::string getType() const;
-	void	setType(const std::string& type);
-	Weapon(std::string);
-	~Weapon();
-	Weapon& operator=(const Weapon &other);
-};
+
+int main()
+{
+	srand(time(NULL));
+
+	std::string array[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+
+	Harl Karen;
+	for (int i = 0; i < 10; i++) {
+		int randomNum = rand() % 4;
+		Karen.complain(array[randomNum]);
+		std::cout << std::endl;
+	}
+}

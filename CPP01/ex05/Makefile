@@ -6,14 +6,14 @@
 #    By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 09:59:30 by joao-pol          #+#    #+#              #
-#    Updated: 2025/01/23 15:45:19 by joao-pol         ###   ########.fr        #
+#    Updated: 2025/01/23 16:02:15 by joao-pol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-NAME = megaphone
-SRCS = megaphone.cpp
-CFLAGS = -Wall  -Wextra -std=c++98 -g
+NAME = harl
+SRCS = main.cpp Harl.cpp
+CFLAGS = -Wall -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 
 
@@ -34,6 +34,6 @@ fclean : clean
 re : fclean all
 
 va : re
-	valgrind --leak-check=full --show-leak-kinds=all ./phonebook
+	valgrind -q --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 .PHONY : all fclean re
