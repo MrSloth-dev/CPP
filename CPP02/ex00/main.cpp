@@ -1,34 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 15:53:24 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/23 16:34:07 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/01/24 12:28:32 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/24 12:31:20 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_HPP
-#define HARL_HPP
-
-#pragma once
-
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <ctime>
-
-class Harl {
-	private:
-	void	debug(void);
-	void	info(void);
-	void	warning(void);
-	void	error(void);
-
-	public:
-	void	complain(std::string level);
-};
-
-#endif
+#include "Fixed.hpp"

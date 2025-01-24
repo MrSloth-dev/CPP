@@ -6,14 +6,14 @@
 #    By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 09:59:30 by joao-pol          #+#    #+#              #
-#    Updated: 2025/01/23 16:02:15 by joao-pol         ###   ########.fr        #
+#    Updated: 2025/01/23 12:02:50 by joao-pol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-NAME = harl
-SRCS = main.cpp Harl.cpp
-CFLAGS = -Wall -Wextra -std=c++98 -Weffc++
+NAME = Fixed
+SRCS = main.cpp
+CFLAGS = -Wall -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 
 
