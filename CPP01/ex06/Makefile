@@ -13,7 +13,7 @@
 CC = c++
 NAME = harlFilter
 SRCS = main.cpp Harl.cpp
-CFLAGS = -Wall -Wextra -std=c++98 -g
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 
 

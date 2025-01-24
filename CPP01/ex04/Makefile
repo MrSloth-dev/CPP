@@ -13,7 +13,7 @@
 CC = c++
 NAME = SedForLosers
 SRCS = main.cpp
-CFLAGS = -Wall -Wextra -std=c++98 -g
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 
 
