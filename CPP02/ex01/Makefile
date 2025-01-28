@@ -13,7 +13,7 @@
 CC = c++
 NAME = Fixed
 SRCS = main.cpp Fixed.cpp
-CFLAGS = -Wall -Weffc++ -Werror -Wextra -std=c++98 -g
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 
 

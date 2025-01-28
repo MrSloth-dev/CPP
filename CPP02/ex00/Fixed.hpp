@@ -1,7 +1,7 @@
 
 class Fixed {
 private:
-	int _fixed;
+	int _fixedPoint;
 	static const int _frac_bits = 8;
 public:
 	Fixed();

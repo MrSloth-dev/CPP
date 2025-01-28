@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 
 	std::string OldStr = argv[2];
 	std::string NewStr = argv[3];
-	std::string FileName(argv[1]);
+	std::string FileName = argv[1];
 	std::ifstream File(FileName.c_str());
 	if (!File.is_open()) {
 		std::cout << "Error: invalid input" << std::endl; return 2;

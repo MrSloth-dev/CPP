@@ -32,16 +32,16 @@ int main()
 		jim.attack();
 	}
 	{
-		std::string wp = "404 Weapon not found";
+		std::string wp = "crude spliked club";
 		Weapon club = Weapon(wp);
 		HumanB joel("Joel");
-		joel.setWeapon(club);
 		joel.attack();
+		joel.setWeapon(club);
 		club.setType("some other type of club");
 		joel.attack();
 	}
 	{
-		std::string wp = "404 Weapon not found";
+		std::string wp = "";
 		Weapon club = Weapon(wp);
 		HumanB toni("Toni");
 		toni.setWeapon(club);
