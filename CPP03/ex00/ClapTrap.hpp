@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:44:08 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/29 13:48:15 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:02:10 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class ClapTrap {
 	uint	AD;
 	
 	public:
+	ClapTrap(std::string name);
 	void	attack(const std::string &target);
 	void	takeDamage(uint amount);
 	void	beRepaired(uint amount);

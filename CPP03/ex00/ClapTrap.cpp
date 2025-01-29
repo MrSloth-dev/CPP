@@ -2,6 +2,9 @@
 #include "ClapTrap.hpp"
 
 #include <iostream>
+ClapTrap::ClapTrap(std::string name){
+
+}
 void	ClapTrap::takeDamage(uint amount) {
 
 }
