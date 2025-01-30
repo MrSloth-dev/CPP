@@ -6,13 +6,13 @@
 #    By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 09:59:30 by joao-pol          #+#    #+#              #
-#    Updated: 2025/01/29 13:44:57 by joao-pol         ###   ########.fr        #
+#    Updated: 2025/01/30 17:12:53 by joao-pol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 NAME = Claptrap
-SRCS = main.cpp ClapTrap.cpp
+SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 

@@ -6,15 +6,20 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:42:45 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/30 12:01:11 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:12:05 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 #include <iostream>
 
+ClapTrap::ClapTrap() : _name("DEFAULT"), _HP(10), _EP(10), _AD(0) {
+	std::cout << "I am a CL4P-TP steward bot, but my friends call me " << _name
+	<< " the Claptrap! Or they would, if any of them were still alive, or have existed in the first place!" << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name) : _name(name), _HP(10), _EP(10), _AD(0) {
-	std::cout << "I am a CL4P-TP steward bot, but my friends call me " << name
+	std::cout << "I am a CL4P-TP steward bot, but my friends call me " << _name
 	<< " the Claptrap! Or they would, if any of them were still alive, or have existed in the first place!" << std::endl;
 }
 

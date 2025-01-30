@@ -108,10 +108,10 @@ int main( void ) {
 
 		std::cout << std::endl;
 
-		std::cout << "a (" << ++a << ") or b(" << ++b  << ") is min (" << Fixed::min(a,b) << ")" << std::endl;
-		std::cout << "a (" << ++a << ") or b(" <<++ b  << ") is max (" << Fixed::max(a,b) << ")" << std::endl;
-		std::cout << "a (" << a << ") or a(" << a  << ") is max (" << Fixed::max(a,a) << ")" << std::endl;
-		std::cout << "c (" << c << ") or d(" << d  << ") is min (" << Fixed::min(c,d) << ")" << std::endl;
-		std::cout << "c (" << c << ") or d(" << d  << ") is max (" << Fixed::max(c,d) << ")" << std::endl;
+		std::cout << "a (" << ++a << ") or b(" << ++b  << ") is min (" << Fixed::min(a, b) << ")" << std::endl;
+		std::cout << "a (" << ++a << ") or b(" <<++ b  << ") is max (" << Fixed::max(a, b) << ")" << std::endl;
+		std::cout << "a (" << a << ") or a(" << a  << ") is max (" << Fixed::max(a, a) << ")" << std::endl;
+		std::cout << "c (" << c << ") or d(" << d  << ") is min (" << Fixed::min(c, d) << ")" << std::endl;
+		std::cout << "c (" << c << ") or d(" << d  << ") is max (" << Fixed::max(c, d) << ")" << std::endl;
 	}
 }
