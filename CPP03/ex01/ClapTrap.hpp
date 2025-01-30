@@ -17,15 +17,15 @@
 
 
 class ClapTrap {
-	private:
+private:
 	ClapTrap();
-	protected:
+protected:
 	std::string	_name;
-	const unsigned int	_HP = 100;
-	const unsigned int	_EP = 50;
-	const unsigned int	_AD = 20;
-	
-	public:
+	unsigned int	_HP;
+	unsigned int	_EP;
+	unsigned int	_AD;
+
+public:
 	ClapTrap(std::string name);
 	ClapTrap(const ClapTrap& other);
 	~ClapTrap();
