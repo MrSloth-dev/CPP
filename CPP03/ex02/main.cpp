@@ -12,6 +12,7 @@
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main()
 {
@@ -36,11 +37,23 @@ int main()
 		Tony.attack("Sandro");
 	}
 	{
+		std::cout << std::endl << "ScavTrap" << std::endl;
 		std::string target = "Sandro";
-		std::cout << std::endl << "pointerrr" << std::endl;
 		ClapTrap *Tome = new ScavTrap("Tome");
 		Tome->attack(target);
 		Tome->takeDamage(100);
+		delete Tome;
+	}
+	{
+		std::string target = "Ambrosio";
+		std::cout << std::endl << "FragTrap" << std::endl;
+		FragTrap *Tome = new FragTrap("Tome");
+		Tome->attack(target);
+		Tome->takeDamage(100);
+		Tome->hightFivesGuys();
+		Tome->hightFivesGuys();
+		Tome->hightFivesGuys();
+		Tome->hightFivesGuys();
 		delete Tome;
 	}
 }

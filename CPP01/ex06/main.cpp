@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:33:55 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/23 16:34:46 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:43:39 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int main(int argc, char *argv[])
 	}
 	Harl Karen;
 	switch (min_level) {
-			break;
 		case  0:
 			Print(Karen, "DEBUG");
 		case 1:

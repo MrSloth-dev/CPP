@@ -1,49 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:42:45 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/30 17:14:17 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:32:08 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include "ClapTrap.hpp"
-#include <iostream>
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
+FragTrap::FragTrap(void) : ClapTrap("DEFAULT") {
+	_name = "DEFAULT";
 	_HP = 100;
-	_EP = 50;
-	_AD = 20;
-	std::cout << "Scavtrap: Hi! My name is "<< name << "! You want me? To join you? " 
+	_EP = 100;
+	_AD = 30;
+	std::cout << "Fragtrap: Hi! My name is DEFAULT! You want me? To join you? " 
 		<< "I am SO excited. We will be best friends." << std::endl;
 }
 
-ScavTrap::~ScavTrap()
+FragTrap::FragTrap(std::string name) : ClapTrap(name) {
+	_HP = 100;
+	_EP = 100;
+	_AD = 30;
+	std::cout << "Fragtrap: Hi! My name is "<< name << "! You want me? To join you? " 
+		<< "I am SO excited. We will be best friends." << std::endl;
+}
+
+FragTrap::~FragTrap()
 {
-	std::cout << "ScavTrap: I'm too pretty to die!" << std::endl;
+	std::cout << "FragTrap: I'm too pretty to die!" << std::endl;
 }
 
-void	ScavTrap::attack(const std::string& target) {
-	if (this->_EP == 0 || this->_HP == 0) {
-		std::cout << "ScavTrap:  I'm out of oil!" << std::endl;
-	}
-	else {
-		this->_EP--;
-		std::cout << "ScavTrap " << this->_name << " charges into " << target
-			<< ", causing " << this->_AD << " points of damage!" << std::endl;
-	}
-}
-
-void ScavTrap::guardGate(void) {
-	this->_gateMode = true;
-	std::cout << "ScavTrap: Recompiling my combat code! Now I'm gatekeeping!" << std::endl;
+void FragTrap::hightFivesGuys(void) {
+	std::cout << "Secret handshake!" << std::endl;
 };
 
-ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
+FragTrap& FragTrap::operator=(const FragTrap& other) {
 	if (this != &other) {
 		this->_name = other._name;
 		this->_HP = other._HP;

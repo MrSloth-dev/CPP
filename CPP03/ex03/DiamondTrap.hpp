@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 13:44:08 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/30 17:15:13 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/01/30 16:44:46 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/31 13:30:31 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
+#ifndef FRAGTRAP_HPP_
+#define FRAGTRAP_HPP_
 #pragma once
-#include <iostream>
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-
-class ClapTrap {
+class DiamondTrap : public ScavTrap, public FragTrap {
 private:
-	ClapTrap();
-protected:
-	std::string	_name;
-	unsigned int	_HP;
-	unsigned int	_EP;
-	unsigned int	_AD;
-
+	std::string name;
 public:
-	ClapTrap(std::string name);
-	ClapTrap(const ClapTrap& other);
-	virtual ~ClapTrap();
+	DiamondTrap();
+	DiamondTrap(std::string name);
+	DiamondTrap(const DiamondTrap& other);
+	~DiamondTrap();
 
-	virtual void	attack(const std::string &target);
-	void	takeDamage(unsigned int amount);
-	void	beRepaired(unsigned int amount);
+	DiamondTrap& operator=(const DiamondTrap& other);
 
-	ClapTrap& operator=(const ClapTrap& other);
+	void	hightFivesGuys(void);
 };
 #endif

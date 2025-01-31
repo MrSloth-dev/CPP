@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,21 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP_
-#define SCAVTRAP_HPP_
+#ifndef FRAGTRAP_HPP_
+#define FRAGTRAP_HPP_
 #pragma once
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
-private:
-	bool _gateMode;
+class FragTrap : public ClapTrap {
 public:
-	ScavTrap(std::string name);
-	ScavTrap(const ScavTrap& other);
-	~ScavTrap();
 
-	ScavTrap& operator=(const ScavTrap& other);
-	void	attack(const std::string &target);
-	void	guardGate(void);
+	FragTrap(void);
+
+
+	FragTrap(const FragTrap& other);
+	~FragTrap();
+	FragTrap& operator=(const FragTrap& other);
+	void	hightFivesGuys(void);
 };
 #endif

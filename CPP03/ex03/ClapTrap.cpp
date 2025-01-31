@@ -19,7 +19,7 @@ ClapTrap::ClapTrap() : _name("DEFAULT"), _HP(10), _EP(10), _AD(0) {
 }
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _HP(10), _EP(10), _AD(0) {
-	std::cout << "I am a CL4P-TP steward bot, but my friends call me " << _name
+	std::cout << "I am a CL4P-TP steward bot, but my friends call me " << name
 	<< " the Claptrap! Or they would, if any of them were still alive!" << std::endl;
 }
 
