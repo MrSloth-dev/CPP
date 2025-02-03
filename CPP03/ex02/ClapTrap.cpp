@@ -34,8 +34,10 @@ ClapTrap::~ClapTrap()
 
 void	ClapTrap::takeDamage(unsigned int amount) {
 	std::cout << "PROTECT ME, SQUIRE!!" << std::endl;
-	if (amount >= this->_HP)
+	if (amount >= this->_HP) {
+		this->_HP = 0;
 		std::cout << "RIP" << std::endl;
+	}
 	else
 		this->_HP -= amount;
 }

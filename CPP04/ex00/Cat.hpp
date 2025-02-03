@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 16:44:46 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/30 17:01:03 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/02/03 12:38:16 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/02/03 14:03:28 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP_
-#define SCAVTRAP_HPP_
-#pragma once
-#include "ClapTrap.hpp"
+#include "Animal.hpp"
 
-class ScavTrap : public ClapTrap {
-private:
-	bool _gateMode;
-public:
-	ScavTrap(void);
-	ScavTrap(std::string name);
-	ScavTrap(const ScavTrap& other);
-	~ScavTrap();
-
-	ScavTrap& operator=(const ScavTrap& other);
-	void	attack(const std::string &target);
-	void	guardGate(void);
+class Cat : public Animal {
+	protected:
+	std::string _name;
+	public:
+	Cat();
+	Cat(std::string _name);
+	~Cat();
+	Cat& operator=(const Cat& other);
+	std::string	getType() const;
+	void		setType(std::string type);
+	void	makeSound() const;
 };
-#endif

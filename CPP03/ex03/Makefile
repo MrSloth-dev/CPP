@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = c++
-NAME = Claptrap
+NAME = DiamondTrap
 SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp Diamond.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)

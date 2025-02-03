@@ -13,6 +13,11 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
+ClapTrap::ClapTrap(void) : _name("DEFAULT"), _HP(10), _EP(10), _AD(0) {
+	std::cout << "I am a CL4P-TP steward bot, but my friends call me " << this->_name
+	<< " the Claptrap! Or they would, if any of them were still alive, or have existed in the first place!" << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name) : _name(name), _HP(10), _EP(10), _AD(0) {
 	std::cout << "I am a CL4P-TP steward bot, but my friends call me " << name
 	<< " the Claptrap! Or they would, if any of them were still alive, or have existed in the first place!" << std::endl;
@@ -29,8 +34,10 @@ ClapTrap::~ClapTrap()
 
 void	ClapTrap::takeDamage(unsigned int amount) {
 	std::cout << "PROTECT ME, SQUIRE!!" << std::endl;
-	if (amount >= this->_HP)
+	if (amount >= this->_HP) {
+		this->_HP = 0;
 		std::cout << "RIP" << std::endl;
+	}
 	else
 		this->_HP -= amount;
 }

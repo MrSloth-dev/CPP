@@ -14,11 +14,22 @@
 
 int main()
 {
-	std::string target = "Sandro";
-	ClapTrap Joel("Joel");
-	Joel.attack(target);
-	Joel.beRepaired(2);
-	Joel.takeDamage(10);
-	Joel.takeDamage(2);
-	Joel.attack("Sandro");
+	{
+		std::string target = "Sandro";
+		ClapTrap Joel("Joel");
+		Joel.attack(target);
+		Joel.beRepaired(2);
+		Joel.takeDamage(10);
+		Joel.takeDamage(2);
+		Joel.attack("Sandro");
+	}
+	{
+		std::string target = "Sandro";
+		ClapTrap Joel;
+		Joel.attack(target);
+		Joel.beRepaired(2);
+		Joel.takeDamage(10);
+		Joel.takeDamage(2);
+		Joel.attack("Sandro");
+	}
 }

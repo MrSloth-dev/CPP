@@ -17,13 +17,12 @@
 
 class FragTrap : public ClapTrap {
 public:
-
 	FragTrap(void);
-
-
+	FragTrap(std::string name);
 	FragTrap(const FragTrap& other);
 	~FragTrap();
 	FragTrap& operator=(const FragTrap& other);
+
 	void	hightFivesGuys(void);
 };
 #endif

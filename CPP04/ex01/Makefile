@@ -6,13 +6,13 @@
 #    By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 09:59:30 by joao-pol          #+#    #+#              #
-#    Updated: 2025/01/30 17:12:53 by joao-pol         ###   ########.fr        #
+#    Updated: 2025/02/03 14:00:03 by joao-pol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-NAME = Fragtrap
-SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+NAME = Brain
+SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 

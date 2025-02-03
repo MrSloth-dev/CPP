@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 16:44:46 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/30 17:01:03 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/02/03 14:25:40 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/02/03 17:40:17 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP_
-#define SCAVTRAP_HPP_
-#pragma once
-#include "ClapTrap.hpp"
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-class ScavTrap : public ClapTrap {
-private:
-	bool _gateMode;
-public:
-	ScavTrap(void);
-	ScavTrap(std::string name);
-	ScavTrap(const ScavTrap& other);
-	~ScavTrap();
+class Dog : public Animal {
+	private:
+	Brain* brain;
 
-	ScavTrap& operator=(const ScavTrap& other);
-	void	attack(const std::string &target);
-	void	guardGate(void);
+	public:
+	Dog();
+	Dog(const Dog&);
+	~Dog();
+	Dog& operator=(const Dog& other);
+
+	void	makeSound() const;
+
+	std::string	getType() const;
+	void		setType(std::string type);
+	void		setIdea(unsigned int index, std::string idea);
+	std::string	getIdea(unsigned int index) const;
 };
-#endif
+
