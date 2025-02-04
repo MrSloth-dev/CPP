@@ -50,10 +50,22 @@ int main()
 		FragTrap *Tome = new FragTrap("Tome");
 		Tome->attack(target);
 		Tome->takeDamage(100);
-		Tome->hightFivesGuys();
-		Tome->hightFivesGuys();
-		Tome->hightFivesGuys();
-		Tome->hightFivesGuys();
+		Tome->highFivesGuys();
+		Tome->highFivesGuys();
+		Tome->highFivesGuys();
+		Tome->highFivesGuys();
 		delete Tome;
+	}
+	{
+		FragTrap Faby("Faby");
+		FragTrap Chone(Faby);
+
+		Faby.attack("Target");
+		Faby.takeDamage(50);
+		Faby.beRepaired(20);
+		Faby.highFivesGuys();
+
+		FragTrap Orlando("Another");
+		Orlando = Faby;
 	}
 }

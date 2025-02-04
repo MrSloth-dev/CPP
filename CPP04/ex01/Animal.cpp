@@ -12,16 +12,6 @@
 
 
 #include "Animal.hpp"
-/* class Animal {
-	private:
-	protected:
-	std::string _name;
-	public:
-	Animal();
-	Animal(std::string _name);
-	~Animal();
-	Animal& operator=(const Animal& other);
-}; */
 
 Animal::Animal() : _type("No Species"){
 	std::cout << "Animal created" << std::endl;
@@ -35,12 +25,8 @@ Animal::~Animal() {
 	std::cout << "Animal died" << std::endl;
 }
 
-void	Animal::setType(std::string type) {
-	this->_type = type;
-}
-
-std::string	Animal::getType() const {
-	return this->_type;
+Animal::Animal(const Animal& other) {
+	*this = other;
 }
 
 Animal& Animal::operator=(const Animal& other) {
@@ -48,6 +34,14 @@ Animal& Animal::operator=(const Animal& other) {
 		this->_type = other.getType();
 	}
 	return (*this);
+}
+
+void	Animal::setType(std::string type) {
+	this->_type = type;
+}
+
+std::string	Animal::getType() const {
+	return this->_type;
 }
 
 void	Animal::makeSound() const {

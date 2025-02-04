@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_HPP_
-#define FRAGTRAP_HPP_
 #pragma once
 #include "ClapTrap.hpp"
 
@@ -23,6 +21,5 @@ public:
 	~FragTrap();
 	FragTrap& operator=(const FragTrap& other);
 
-	void	hightFivesGuys(void);
+	void	highFivesGuys(void);
 };
-#endif

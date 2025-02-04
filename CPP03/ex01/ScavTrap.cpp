@@ -14,7 +14,7 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-ScavTrap::ScavTrap(void) : ClapTrap("DEFAULT") {
+ScavTrap::ScavTrap(void) : ClapTrap("DEFAULT"), _gateMode(false) {
 	_HP = 100;
 	_EP = 50;
 	_AD = 20;
@@ -22,12 +22,16 @@ ScavTrap::ScavTrap(void) : ClapTrap("DEFAULT") {
 		<< "I am SO excited. We will be best friends." << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name), _gateMode(false) {
 	_HP = 100;
 	_EP = 50;
 	_AD = 20;
 	std::cout << "Scavtrap: Hi! My name is "<< name << "! You want me? To join you? " 
 		<< "I am SO excited. We will be best friends." << std::endl;
+}
+
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
+	*this = other;
 }
 
 ScavTrap::~ScavTrap()

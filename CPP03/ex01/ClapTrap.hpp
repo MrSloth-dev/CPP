@@ -10,15 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
 #pragma once
 #include <iostream>
-
+#include <string>
 
 class ClapTrap {
 private:
-	ClapTrap();
 protected:
 	std::string	_name;
 	unsigned int	_HP;
@@ -26,6 +23,7 @@ protected:
 	unsigned int	_AD;
 
 public:
+	ClapTrap();
 	ClapTrap(std::string name);
 	ClapTrap(const ClapTrap& other);
 	virtual ~ClapTrap();
@@ -36,4 +34,3 @@ public:
 
 	ClapTrap& operator=(const ClapTrap& other);
 };
-#endif

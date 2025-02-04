@@ -34,6 +34,7 @@ int main()
 		Tony.takeDamage(10);
 		Tony.takeDamage(2);
 		Tony.attack("Sandro");
+		Tony.guardGate();
 	}
 	{
 		std::string target = "Sandro";

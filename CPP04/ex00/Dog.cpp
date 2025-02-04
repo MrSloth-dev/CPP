@@ -24,6 +24,10 @@ Dog::~Dog() {
 	std::cout << "Dog died" << std::endl;
 }
 
+Dog::Dog(const Dog& other) : Animal(other) {
+	*this = other;
+}
+
 void	Dog::setType(std::string type) {
 	this->_type = type;
 }

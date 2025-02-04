@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP_
-#define ANIMAL_HPP_
-
+#pragma once
 #include <string>
 #include <iostream>
 
@@ -23,11 +21,11 @@ class Animal {
 	public:
 	Animal(void);
 	Animal(std::string _name);
+	Animal(const Animal& other);
 	virtual ~Animal();
-
 	Animal&		operator=(const Animal& other);
+
 	std::string	getType() const;
 	void		setType(std::string type);
 	virtual void	makeSound() const;
 };
-#endif

@@ -21,6 +21,7 @@ class WrongAnimal {
 	public:
 	WrongAnimal(void);
 	WrongAnimal(std::string _name);
+	WrongAnimal(const WrongAnimal& other);
 	virtual ~WrongAnimal();
 
 	WrongAnimal&		operator=(const WrongAnimal& other);

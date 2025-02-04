@@ -30,12 +30,16 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name) {
 		<< "I am SO excited. We will be best friends." << std::endl;
 }
 
+FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other) {
+	*this = other;
+}
+
 FragTrap::~FragTrap()
 {
 	std::cout << "FragTrap: I'm too pretty to die!" << std::endl;
 }
 
-void FragTrap::hightFivesGuys(void) {
+void FragTrap::highFivesGuys(void) {
 	std::cout << "Secret handshake!" << std::endl;
 };
 

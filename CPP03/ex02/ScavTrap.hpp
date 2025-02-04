@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP_
-#define SCAVTRAP_HPP_
 #pragma once
 #include "ClapTrap.hpp"
+#include <iostream>
+#include <string>
 
 class ScavTrap : public ClapTrap {
 private:
@@ -29,4 +29,3 @@ public:
 	void	attack(const std::string &target);
 	void	guardGate(void);
 };
-#endif

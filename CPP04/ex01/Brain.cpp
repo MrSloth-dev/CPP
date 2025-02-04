@@ -122,6 +122,10 @@ Brain::~Brain(){
 	std::cout << "Brain died" << std::endl;
 }
 
+Brain::Brain(const Brain& other) {
+	*this = other;
+}
+
 Brain& Brain::operator=(const Brain &other) {
 	if (this != &other) {
 		for (uint i = 0 ; i < this->n_idea; i++) {

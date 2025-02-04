@@ -13,7 +13,7 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-ClapTrap::ClapTrap() : _name("DEFAULT"), _HP(10), _EP(10), _AD(0) {
+ClapTrap::ClapTrap(void) : _name("DEFAULT"), _HP(10), _EP(10), _AD(0) {
 	std::cout << "I am a CL4P-TP steward bot, but my friends call me " << _name
 	<< " the Claptrap! Or they would, if any of them were still alive!" << std::endl;
 }

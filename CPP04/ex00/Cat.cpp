@@ -20,6 +20,10 @@ Cat::Cat(std::string type) : Animal(type) {
 	std::cout << "Cat created with type: " << this->_type << std::endl;
 }
 
+Cat::Cat(const Cat& other) : Animal(other) {
+	*this = other;
+}
+
 Cat::~Cat() {
 	std::cout << "Cat died" << std::endl;
 }

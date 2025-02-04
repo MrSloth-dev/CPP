@@ -49,7 +49,7 @@ int main()
 		std::cout << "Original idea: " << dynamic_cast<Dog*>(Original)->getIdea(2) << std::endl;
 		std::cout << "Copy idea: " << dynamic_cast<Dog*>(Copy)->getIdea(2) << std::endl;
 		std::cout << "Copy2 idea: " << Copy2.getIdea(2) << std::endl;
-		std::cout << "Testing NOT changed Idea" << std::endl;
+		std::cout << std::endl << "Testing NOT changed Idea" << std::endl;
 		std::cout << "Original ida: " << dynamic_cast<Dog*>(Original)->getIdea(3) << std::endl;
 		std::cout << "Copy idea: " << dynamic_cast<Dog*>(Copy)->getIdea(3) << std::endl;
 		std::cout << "Copy2 idea: " << Copy2.getIdea(3) << std::endl;

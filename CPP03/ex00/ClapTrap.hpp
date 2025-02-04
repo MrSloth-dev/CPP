@@ -14,6 +14,7 @@
 #define CLAPTRAP_HPP
 #pragma once
 #include <iostream>
+#include <string>
 
 
 class ClapTrap {

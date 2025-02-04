@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
-#include <iostream>
 
 ScavTrap::ScavTrap(void) : ClapTrap("DEFAULT") {
 	_HP = 100;
@@ -27,6 +26,10 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 	_AD = 20;
 	std::cout << "Scavtrap: Hi! My name is "<< name << "! You want me? To join you? " 
 		<< "I am SO excited. We will be best friends." << std::endl;
+}
+
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
+	*this = other;
 }
 
 ScavTrap::~ScavTrap()
