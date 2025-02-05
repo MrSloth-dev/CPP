@@ -21,6 +21,10 @@ Animal::Animal(std::string type) : _type(type) {
 	std::cout << "Animal created with type: " << this->_type << std::endl;
 }
 
+Animal::Animal(const Animal& other) {
+	*this = other;
+}
+
 Animal::~Animal() {
 	std::cout << "Animal died" << std::endl;
 }

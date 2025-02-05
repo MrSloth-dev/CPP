@@ -20,11 +20,20 @@ Cat::Cat(const Cat &other) : Animal(), brain(new Brain(*other.brain)) {
 	*this = other;
 }
 
+Cat& Cat::operator=(const Cat& other) {
+	if (this != &other) {
+		Animal::operator=(other);
+		delete this->brain;
+		this->brain = new Brain(*other.brain);
+		_type = other._type;
+	}
+	return (*this);
+}
+
 Cat::~Cat() {
 	delete this->brain;
 	std::cout << "Cat died" << std::endl;
 }
-
 
 void	Cat::setType(std::string type) {
 	this->_type = type;
@@ -32,13 +41,6 @@ void	Cat::setType(std::string type) {
 
 std::string	Cat::getType() const {
 	return this->_type;
-}
-
-Cat& Cat::operator=(const Cat& other) {
-	if (this != &other) {
-		this->_type = other.getType();
-	}
-	return (*this);
 }
 
 void	Cat::makeSound() const {

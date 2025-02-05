@@ -12,16 +12,6 @@
 
 
 #include "WrongAnimal.hpp"
-/* class WrongAnimal {
-	private:
-	protected:
-	std::string _name;
-	public:
-	WrongAnimal();
-	WrongAnimal(std::string _name);
-	~WrongAnimal();
-	WrongAnimal& operator=(const WrongAnimal& other);
-}; */
 
 WrongAnimal::WrongAnimal() : _type("No Species"){
 	std::cout << "WrongAnimal created" << std::endl;

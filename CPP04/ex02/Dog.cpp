@@ -21,17 +21,17 @@ Dog::Dog(const Dog &other) : Animal(), brain(new Brain(*other.brain)) {
 	*this = other;
 }
 
+Dog::~Dog() {
+	delete this->brain;
+	std::cout << "Dog died" << std::endl;
+}
+
 void	Dog::setType(std::string type) {
 	this->_type = type;
 }
 
 std::string	Dog::getType() const {
 	return this->_type;
-}
-
-Dog::~Dog() {
-	delete this->brain;
-	std::cout << "Dog died" << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& other) {

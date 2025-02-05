@@ -20,9 +20,7 @@ WrongAnimal::WrongAnimal() : _type("No Species"){
 WrongAnimal::WrongAnimal(std::string type) : _type(type) {
 	std::cout << "WrongAnimal created with type: " << this->_type << std::endl;
 }
-WrongAnimal::WrongAnimal(const WrongAnimal& other) {
-	*this = other;
-}
+
 WrongAnimal::~WrongAnimal() {
 	std::cout << "WrongAnimal died" << std::endl;
 }

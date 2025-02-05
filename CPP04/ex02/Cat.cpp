@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:01:38 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/02/03 17:40:54 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:36:18 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "Cat.hpp"
 
-Dog::Dog() : brain(new(Brain)) {
-	std::cout << "Dog created" << std::endl;
-	this->_type = "Dog";
+Cat::Cat() : brain(new(Brain)) {
+	std::cout << "Cat created" << std::endl;
 }
-
-Dog::Dog(const Dog &other) : Animal(), brain(new Brain(*other.brain)) {
+Cat::Cat(const Cat &other) : Animal(), brain(new Brain(*other.brain)) {
 	*this = other;
 }
 
-void	Dog::setType(std::string type) {
+Cat::~Cat() {
+	delete this->brain;
+	std::cout << "Cat died" << std::endl;
+}
+
+
+void	Cat::setType(std::string type) {
 	this->_type = type;
 }
 
-std::string	Dog::getType() const {
+std::string	Cat::getType() const {
 	return this->_type;
 }
 
-Dog::~Dog() {
-	delete this->brain;
-	std::cout << "Dog died" << std::endl;
-}
-
-Dog& Dog::operator=(const Dog& other) {
+Cat& Cat::operator=(const Cat& other) {
 	if (this != &other) {
 		Animal::operator=(other);
 		delete this->brain;
@@ -44,12 +43,12 @@ Dog& Dog::operator=(const Dog& other) {
 	return (*this);
 }
 
-void	Dog::makeSound() const {
-	std::cout << "🐕Woof woof!🐕" << std::endl;
+void	Cat::makeSound() const {
+	std::cout << "🐈Meow Meow!🐈" << std::endl;
 }
 
-std::string	Dog::getIdea(unsigned int index) const {
-	if (index < 1 || index > 100) {
+std::string	Cat::getIdea(unsigned int index) {
+	if (index < 1 || index < 100) {
 		std::cout << "Index must be between 1 an 100" << std::endl;
 		return "";
 	}
@@ -57,7 +56,10 @@ std::string	Dog::getIdea(unsigned int index) const {
 		return this->brain->ideas[index - 1];
 }
 
-void	Dog::setIdea(unsigned int index, std::string idea) {
-	if (index <= 100)
+void	Cat::setIdea(unsigned int index, std::string idea) {
+	if (index < 1 || index < 100) {
+		std::cout << "Index must be between 1 an 100" << std::endl;
+	}
+	else
 		this->brain->ideas[index - 1] = idea;
 }
