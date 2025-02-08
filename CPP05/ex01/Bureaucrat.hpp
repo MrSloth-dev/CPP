@@ -6,11 +6,13 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:09:27 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/02/06 13:00:30 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:07:36 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
+#include "Form.hpp"
 #include <exception>
 #include <ostream>
 #include <string>
@@ -41,6 +43,10 @@ class Bureaucrat {
 	class GradeTooHighException :  public std::exception {
 		virtual const char* what() const throw();
 	};
+
+	void signForm(Form& F);
 };
 
 std::ostream& operator<<(std::ostream&, const Bureaucrat&);
+
+#endif

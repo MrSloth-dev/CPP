@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:06:20 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/02/06 15:22:08 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:08:34 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,6 @@ const char* Bureaucrat::GradeTooHighException::what() const throw() {
 	return "Grade Too High!";
 }
 
+void	Bureaucrat::signForm(Form& F) {
+	F.beSigned(this);
+}
