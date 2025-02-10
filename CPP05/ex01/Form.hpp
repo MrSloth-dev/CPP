@@ -10,19 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#pragma once
 #include "Bureaucrat.hpp"
+#include <string>
+#include <iostream>
 
+class Bureaucrat;
 class Form {
 private:
+	Form();
 	std::string const _name;
 	bool _signed;
 	int	const _minGradeSign;
 	int	const _minGradeExec;
 public:
-
-	Form(std::string name, int min_grade_sign, int _min_grade_exec);
+	Form(std::string const name, int const min_grade_sign, int const min_grade_exec);
 	Form(const Form& copy);
 	Form& operator=(const Form& other);
 	~Form();
@@ -40,6 +42,7 @@ public:
 		virtual const char* what() const throw();
 	};
 
-	void	beSigned(const Bureaucrat& B);
+	void	beSigned(Bureaucrat& B);
 };
-#endif
+
+std::ostream& operator<<(std::ostream os, const Form&);

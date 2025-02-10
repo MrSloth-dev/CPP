@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 
 #pragma once
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <exception>
 #include <iostream>
 #include <string>
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 	private:
@@ -43,7 +43,7 @@ class Bureaucrat {
 		virtual const char* what() const throw();
 	};
 
-	void signForm(Form& F);
+	void signAForm(AForm& F) const;
 };
 
 std::ostream& operator<<(std::ostream&, const Bureaucrat&);

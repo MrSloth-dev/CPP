@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #include <exception>
 #include <iostream>
@@ -88,7 +88,7 @@ const char* Bureaucrat::GradeTooHighException::what() const throw() {
 	return "Grade Too High!";
 }
 
-void	Bureaucrat::signForm(Form& F) {
+void	Bureaucrat::signAForm(AForm& F) const {
 	try {F.beSigned(*this);} 
 	catch (std::exception &e) {
 		std::cout << this->getName() << " couldn't sign " << F.getName() << " because "  << e.what() << std::endl;
