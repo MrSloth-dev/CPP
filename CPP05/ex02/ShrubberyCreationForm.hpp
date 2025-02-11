@@ -20,8 +20,7 @@ class ShrubberyCreationForm: public AForm {
 	private:
 		ShrubberyCreationForm();
 		void PrinTree(std::ostream& os);
-	const std::string target;
-	protected:
+		const std::string _target;
 		int const _minGradeSign;
 		int const _minGradeExec;
 	public:
@@ -29,5 +28,6 @@ class ShrubberyCreationForm: public AForm {
 		ShrubberyCreationForm(const ShrubberyCreationForm& copy);
 		virtual ~ShrubberyCreationForm();
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
+		std::string getTarget() const;
 		void	execute(Bureaucrat const & executor);
 };

@@ -37,17 +37,10 @@ void ShrubberyCreationForm::PrinTree(std::ostream& os) {
     os << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm(target, 145, 137), _minGradeSign(145), _minGradeExec(137) {
-	std::ofstream File((target + "_shrubbery").c_str(), std::ofstream::out);
-	try {File.is_open();}
-	catch (std::exception &e) {
-		std::cout << "Error: invalid target" << std::endl;
-		return;
-	}
-	this->PrinTree(File);
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm(target, 145, 137), _target(target), _minGradeSign(145), _minGradeExec(137) {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy): AForm(copy.getName(), copy.getGradeSign(), copy.getGradeExec()), _minGradeSign(copy.getGradeSign()), _minGradeExec(copy.getGradeExec()) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy): AForm(copy.getName(), copy.getGradeSign(), copy.getGradeExec()), _target(copy._target), _minGradeSign(copy.getGradeSign()), _minGradeExec(copy.getGradeExec()) {
     std::cout << "Copy Constructor called" << std::endl;
 }
 
@@ -55,9 +48,19 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 	std::cout << "RIP!" << std::endl;
 }
 
+std::string ShrubberyCreationForm::getTarget() const {
+    return this->_target;
+}
 void ShrubberyCreationForm::execute(const Bureaucrat& executor) { 
     try {this->beSigned(executor); }
     catch (std::exception &e) {
         std::cerr << executor.getName() << " cannot sign " << this->getName();
     }
+    std::ofstream File((this->_target + "_shrubbery").c_str(), std::ofstream::out);
+    try {File.is_open();}
+    catch (std::exception &e) {
+        std::cout << "Error: invalid target" << std::endl;
+        return;
+    }
+    this->PrinTree(File);
 }
