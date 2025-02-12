@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AForm.hpp"
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include <iostream>
@@ -37,11 +37,11 @@ void ShrubberyCreationForm::PrinTree(std::ostream& os) {
     os << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm(target, 145, 137), _target(target) {
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form(target, 145, 137), _target(target) {
     std::cout << "Shrubbery form Created" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy): AForm(copy.getName(), copy.getGradeSign(), copy.getGradeExec()), _target(copy._target) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy): Form(copy.getName(), copy.getGradeSign(), copy.getGradeExec()), _target(copy._target) {
     std::cout << "Copy Constructor called" << std::endl;
 }
 

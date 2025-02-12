@@ -13,21 +13,17 @@
 #pragma once
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
-#include <ostream>
-#include <string>
 
 class ShrubberyCreationForm: public AForm {
 	private:
 		ShrubberyCreationForm();
 		void PrinTree(std::ostream& os);
 		const std::string _target;
-		int const _minGradeSign;
-		int const _minGradeExec;
 	public:
 		ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm& copy);
 		virtual ~ShrubberyCreationForm();
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 		std::string getTarget() const;
-		void	execute(Bureaucrat const & executor);
+		void	Aexecute();
 };

@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #pragma once
-#include "AForm.hpp"
+#include "Form.hpp"
 
-class RobotomyRequestForm: public AForm {
+class RobotomyRequestForm: public Form {
 	private:
 		RobotomyRequestForm();
 		void PrinTree(std::ostream& os);

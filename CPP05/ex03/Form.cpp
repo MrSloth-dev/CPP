@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.cpp                                           :+:      :+:    :+:   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
+#include "Form.hpp"
 
 
-AForm::AForm(std::string const name, int const min_grade_sign, int const min_grade_exec) : _name(name), _signed(false), _minGradeSign(min_grade_sign), _minGradeExec(min_grade_exec) {
+Form::Form(std::string const name, int const min_grade_sign, int const min_grade_exec) : _name(name), _signed(false), _minGradeSign(min_grade_sign), _minGradeExec(min_grade_exec) {
 	if (_minGradeExec < 1 || _minGradeSign < 1)
 		throw GradeTooLowException();
 	else if (_minGradeExec > 150 || _minGradeSign > 150)
@@ -24,17 +24,17 @@ AForm::AForm(std::string const name, int const min_grade_sign, int const min_gra
 	}
 }
 
-AForm::AForm(const AForm& copy) : _name(copy._name), _signed(copy._signed) , _minGradeSign(copy._minGradeSign), _minGradeExec(copy._minGradeExec){
+Form::Form(const Form& copy) : _name(copy._name), _signed(copy._signed) , _minGradeSign(copy._minGradeSign), _minGradeExec(copy._minGradeExec){
 	*this = copy;
 }
 
 //Operators
-AForm & AForm::operator=(const AForm& other) {
+Form & Form::operator=(const Form& other) {
 	this->_signed = other._signed;
 	return *this;
 }
 
-std::ostream& operator<<(std::ostream& os, const AForm& F) {
+std::ostream& operator<<(std::ostream& os, const Form& F) {
 	os << "Name: " << F.getName() << std::endl;
 	os << "Minimum Grade Sign: " << F.getGradeSign() << std::endl;
 	os << "Minimum Grade Exec: " << F.getGradeExec() << std::endl;
@@ -42,47 +42,47 @@ std::ostream& operator<<(std::ostream& os, const AForm& F) {
 	return os;
 }
 
-AForm::~AForm() {
-	std::cout << this->_name << ", the AForm is out!" << std::endl;
+Form::~Form() {
+	std::cout << this->_name << ", the Form is out!" << std::endl;
 }
 // Geters
-std::string AForm::getName(void) const {
+std::string Form::getName(void) const {
 	return this->_name;
 }
 
-bool AForm::getSigned(void) const {
+bool Form::getSigned(void) const {
 	return this->_signed;
 }
 
-int	AForm::getGradeSign(void) const {
+int	Form::getGradeSign(void) const {
 	return this->_minGradeSign;
 }
 
-int	AForm::getGradeExec(void) const {
+int	Form::getGradeExec(void) const {
 	return this->_minGradeExec;
 }
 // Exceptions
-const char* AForm::GradeTooLowException::what() const throw() {
+const char* Form::GradeTooLowException::what() const throw() {
 	return "Grade Too Low";
 }
 
-const char* AForm::GradeTooHighException::what() const throw() {
+const char* Form::GradeTooHighException::what() const throw() {
 	return "Grade Too High!";
 }
 
-const char* AForm::NotSignedException::what() const throw() {
+const char* Form::NotSignedException::what() const throw() {
 	return "Form is not Signed!";
 }
 
 //Methods
-void	AForm::beSigned(const Bureaucrat& B) {
+void	Form::beSigned(const Bureaucrat& B) {
 	if (B.getGrade() > this->getGradeSign())
-		throw AForm::GradeTooLowException();
+		throw Form::GradeTooLowException();
 	else
 		this->_signed = true;
 }
 
-void	AForm::execute(const Bureaucrat& executor) {
+void	Form::execute(const Bureaucrat& executor) {
 	if (this->getSigned() == false)
 		throw NotSignedException();
 	else if (executor.getGrade() > this->_minGradeExec)

@@ -11,17 +11,17 @@
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
-#include "AForm.hpp"
+#include "Form.hpp"
 #include <cstdlib>
 #include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
-    : AForm(target, 72, 45), _target(target) {
+    : Form(target, 72, 45), _target(target) {
   std::cout << "Robotomy Request Created" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy)
-    : AForm(copy.getName(), copy.getGradeSign(), copy.getGradeExec()) {
+    : Form(copy.getName(), copy.getGradeSign(), copy.getGradeExec()) {
   std::cout << "Copy Constructor called" << std::endl;
 }
 

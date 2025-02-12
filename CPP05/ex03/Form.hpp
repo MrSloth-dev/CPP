@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.hpp                                          :+:      :+:    :+:   */
+/*   Form.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,19 +17,19 @@
 #include <ostream>
 
 class Bureaucrat;
-class AForm {
+class Form {
 	private:
-		AForm();
+		Form();
 		std::string const _name;
 		bool _signed;
 		int	const _minGradeSign;
 		int	const _minGradeExec;
 
 	public:
-		AForm(std::string const name, int const min_grade_sign, int const min_grade_exec);
-		AForm(const AForm& copy);
-		AForm& operator=(const AForm& other);
-		virtual ~AForm() = 0;
+		Form(std::string const name, int const min_grade_sign, int const min_grade_exec);
+		Form(const Form& copy);
+		Form& operator=(const Form& other);
+		virtual ~Form() = 0;
 
 		std::string	getName() const;
 		bool		getSigned() const;
@@ -52,4 +52,4 @@ class AForm {
 		virtual void Aexecute(void) = 0;
 };
 
-std::ostream& operator<<(std::ostream os, const AForm&);
+std::ostream& operator<<(std::ostream os, const Form&);

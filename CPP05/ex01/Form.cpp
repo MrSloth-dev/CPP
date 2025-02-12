@@ -21,7 +21,7 @@ Form::Form(std::string const name, int const min_grade_sign, int const min_grade
 	else if (_minGradeExec > 150 || _minGradeSign > 150)
 		throw GradeTooHighException();
 	else {
-		std::cout << "Hello there, my name is " << name << std::endl;
+		std::cout << "I'm a Form and my target is " << name << std::endl;
 	}
 }
 

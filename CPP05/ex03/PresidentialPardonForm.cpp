@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
-#include "AForm.hpp"
+#include "Form.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target)
-    : AForm(target, 25, 5), _target(target) {
+    : Form(target, 25, 5), _target(target) {
   std::cout << "Pardon Form Created" << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy)
-    : AForm(copy.getName(), copy.getGradeSign(), copy.getGradeExec()),
+    : Form(copy.getName(), copy.getGradeSign(), copy.getGradeExec()),
       _target(copy._target) {
   std::cout << "Copy Constructor called" << std::endl;
 }

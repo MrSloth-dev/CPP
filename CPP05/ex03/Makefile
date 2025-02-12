@@ -12,7 +12,7 @@
 
 CC = c++
 NAME = Forms
-SRCS = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRCS = main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 OBJS = $(SRCS:.cpp=.o)
 
