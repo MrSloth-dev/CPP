@@ -12,31 +12,40 @@
 
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 #include <exception>
 #include <iostream>
 
-int main(void)
-{
-	Intern Dumb;
-	try {Dumb.makeForm("RobotomyRequestForm", "test1");}
-	catch (std::exception &e) {
-		std::cerr << "Form not found!" << std::endl;
-	}
-	try {Dumb.makeForm("ShrubberyCreationForm", "test2");}
-	catch (std::exception &e) {
-		std::cerr << "Form not found!" << std::endl;
-	}
-	try {Dumb.makeForm("PresidentialPardonForm", "test3");}
-	catch (std::exception &e) {
-		std::cerr << "Form not found!" << std::endl;
-	}
-	try {Dumb.makeForm("Rubberish", "test4");}
-	catch (std::exception &e) {
-		std::cerr << "Form not found!" << std::endl;
+int main(void) {
+  {
+    Intern Dumb;
+    try {
+      Dumb.makeForm("RobotomyRequestForm", "test1");
+    } catch (std::exception &e) {
+      std::cerr << "Form not found!" << std::endl;
+    }
+    try {
+      Dumb.makeForm("ShrubberyCreationForm", "test2");
+    } catch (std::exception &e) {
+      std::cerr << "Form not found!" << std::endl;
+    }
+    try {
+      Dumb.makeForm("PresidentialPardonForm", "test3");
+    } catch (std::exception &e) {
+      std::cerr << "Form not found!" << std::endl;
+    }
+    try {
+      Dumb.makeForm("Rubberish", "test4");
+    } catch (std::exception &e) {
+      std::cerr << "Form not found!" << std::endl;
+    }
+  }
+	{
+		Bureaucrat Max;
+		std::cout << Max << std::endl;
 	}
 }
