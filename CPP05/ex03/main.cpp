@@ -13,10 +13,6 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include "Intern.hpp"
-#include "PresidentialPardonForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "ShrubberyCreationForm.hpp"
-
 #include <exception>
 #include <iostream>
 
@@ -24,28 +20,28 @@ int main(void) {
   {
     Intern Dumb;
     try {
-      Dumb.makeForm("RobotomyRequestForm", "test1");
+      Form* A = Dumb.makeForm("RobotomyRequestForm", "test1");
+      delete A;
     } catch (std::exception &e) {
       std::cerr << "Form not found!" << std::endl;
     }
     try {
-      Dumb.makeForm("ShrubberyCreationForm", "test2");
+      Form* A = Dumb.makeForm("ShrubberyCreationForm", "test2");
+      delete A;
     } catch (std::exception &e) {
       std::cerr << "Form not found!" << std::endl;
     }
     try {
-      Dumb.makeForm("PresidentialPardonForm", "test3");
+      Form* A = Dumb.makeForm("PresidentialPardonForm", "test3");
+      delete A;
     } catch (std::exception &e) {
       std::cerr << "Form not found!" << std::endl;
     }
     try {
-      Dumb.makeForm("Rubberish", "test4");
+      Form* A = Dumb.makeForm("Rubberish", "test4");
+      delete A;
     } catch (std::exception &e) {
       std::cerr << "Form not found!" << std::endl;
     }
   }
-	{
-		Bureaucrat Max;
-		std::cout << Max << std::endl;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:45:41 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/02/17 14:50:20 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:43:51 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ void ScalarConverter::convert(const std::string &str) {
 	double				val;
 
 	if (iss >> val) {
-		if (val >= 0 && val <= 127 && isprint(static_cast<int>(val)))
-			std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
-		else if (val >= 0 && val <= 127 && !isprint(static_cast<int>(val)))
-			std::cout << "char: Non displayable" << std::endl;
+		if (val >= 0 && val <= 127 && val == static_cast<int>(val)) {
+				if (isprint(static_cast<int>(val)))
+					std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
+				else
+					std::cout << "char: Non displayable" << std::endl;
+		}
 		else
 			std::cout << "char: impossible" << std::endl;
 

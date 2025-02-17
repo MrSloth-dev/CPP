@@ -14,6 +14,7 @@ CC = c++
 NAME = Forms
 SRCS = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
 OBJS = $(SRCS:.cpp=.o)
 
 
@@ -32,6 +33,10 @@ fclean : clean
 	rm -fr $(NAME)
 
 re : fclean all
+
+asan : fclean
+	$(CC) $(CFLAGS) $(ASANFLAGS) $(SRCS) -o $(NAME)
+	./$(NAME)
 
 va : re
 	valgrind -q --leak-check=full --show-leak-kinds=all ./$(NAME)
