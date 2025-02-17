@@ -19,6 +19,7 @@
 Bureaucrat::Bureaucrat(void) :_name("John Doe") {
 	this->_grade = 75;
 }
+
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
 
 	if (grade < 1)
@@ -72,8 +73,8 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
 	return *this;
 }
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& bur) {
-	os << bur.getName() << ", bureaucreate grade " << bur.getGrade() << std::endl;
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& B) {
+	os << B.getName() << ", bureaucreate grade " << B.getGrade() << std::endl;
 	return os;
 } 
 
