@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 16:34:27 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/02/17 17:34:06 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/02/17 14:49:13 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/02/18 17:10:56 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include <stdint.h>
-#include <string>
+#include "Span.hpp"
+#include <exception>
+#include <vector>
 #include <iostream>
-#include <sys/types.h>
-#include "Data.hpp"
 
-class Serializer {
-	private:
-	Serializer();
-	~Serializer();
-	Serializer(const Serializer& copy);
-	Serializer& operator=(const Serializer& other);
-	public:
-	static uintptr_t serialize(Data *ptr);
-	static Data* deserialize(uintptr_t raw);
+int main()
+{
+	{
+		Span vector(100);
+		vector.addNumber(10);
+		vector.addNumber(20);
+		vector.addNumber(40);
+		vector.addNumber(400);
+		vector.addNumber(123);
+		vector.addNumber(723);
+		vector.addNumber(12);
+		std::cout << vector.shortestSpan() << std::endl;
+		std::cout << vector.longestSpan() << std::endl;
 
-};
+
+	}
+	{
+	}
+}
+

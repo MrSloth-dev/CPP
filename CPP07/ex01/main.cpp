@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/2* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
@@ -18,10 +18,13 @@ class test {
 	test(const test& copy);
 	test& operator=(const test& other);
 	~test();
+
 public:
+
 	static void	addFive(int& num) {
 		num += 5;
 	}
+
 	static void	upper(std::string& str) {
 		for (int i = 0; i < static_cast<int>(str.length()); i++) {
 			if (std::islower(str[i]))

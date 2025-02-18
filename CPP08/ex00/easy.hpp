@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   easy.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 16:34:27 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/02/17 17:34:06 by joao-pol         ###   ########.fr       */
+/*   Created: 2025/02/18 15:26:05 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/02/18 15:47:05 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #pragma once
-#include <stdint.h>
-#include <string>
-#include <iostream>
-#include <sys/types.h>
-#include "Data.hpp"
+#include <algorithm>
+#include <exception>
 
-class Serializer {
-	private:
-	Serializer();
-	~Serializer();
-	Serializer(const Serializer& copy);
-	Serializer& operator=(const Serializer& other);
-	public:
-	static uintptr_t serialize(Data *ptr);
-	static Data* deserialize(uintptr_t raw);
-
-};
+template <typename T>
+typename T::iterator easyfind(T container,int n) {
+	if (std::find(container.begin(), container.end(), n) != container.end())
+		return std::find(container.begin(), container.end(), n);
+	else
+		throw std::exception();
+}
