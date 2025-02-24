@@ -18,11 +18,11 @@ class PresidentialPardonForm: public AForm {
 		PresidentialPardonForm();
 		void PrinTree(std::ostream& os);
 		const std::string _target;
+		void	Aexecute();
 	public:
 		PresidentialPardonForm(std::string target);
 		PresidentialPardonForm(const PresidentialPardonForm& copy);
 		virtual ~PresidentialPardonForm();
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 		std::string getTarget() const;
-		void	Aexecute();
 };

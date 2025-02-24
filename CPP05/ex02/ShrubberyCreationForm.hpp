@@ -19,11 +19,11 @@ class ShrubberyCreationForm: public AForm {
 		ShrubberyCreationForm();
 		void PrinTree(std::ostream& os);
 		const std::string _target;
+		void	Aexecute();
 	public:
 		ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm& copy);
 		virtual ~ShrubberyCreationForm();
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 		std::string getTarget() const;
-		void	Aexecute();
 };

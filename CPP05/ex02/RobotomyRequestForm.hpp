@@ -18,13 +18,13 @@ class RobotomyRequestForm: public AForm {
 		RobotomyRequestForm();
 		void PrinTree(std::ostream& os);
 		const std::string _target;
+		void	Aexecute();
 	public:
 		RobotomyRequestForm(std::string target);
 		RobotomyRequestForm(const RobotomyRequestForm& copy);
 		virtual ~RobotomyRequestForm();
 		RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
 		std::string getTarget() const;
-		void	Aexecute();
 		class RobotomyFailedException :  public std::exception {
 			virtual const char* what() const throw();
 		};

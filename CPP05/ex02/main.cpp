@@ -92,4 +92,9 @@ int main(void)
 		std::cout << std::endl;
 		delete hello;
 	}
+	{
+		Bureaucrat Donald("Donald", 1);
+		ShrubberyCreationForm temp("temporary");
+		Donald.executeForm(temp);
+	}
 }

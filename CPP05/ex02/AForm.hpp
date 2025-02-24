@@ -14,9 +14,9 @@
 #include "Bureaucrat.hpp"
 #include <string>
 #include <iostream>
-#include <ostream>
 
 class Bureaucrat;
+
 class AForm {
 	private:
 		AForm();
@@ -24,7 +24,8 @@ class AForm {
 		bool _signed;
 		int	const _minGradeSign;
 		int	const _minGradeExec;
-
+		virtual void Aexecute() = 0;
+	protected:
 	public:
 		AForm(std::string const name, int const min_grade_sign, int const min_grade_exec);
 		AForm(const AForm& copy);
@@ -47,9 +48,7 @@ class AForm {
 			virtual const char* what() const throw();
 		};
 		virtual void	beSigned(const Bureaucrat& B);
-
 		void	execute(const Bureaucrat& executor);
-		virtual void Aexecute(void) = 0;
 };
 
 std::ostream& operator<<(std::ostream os, const AForm&);
