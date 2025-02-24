@@ -1,0 +1,121 @@
+Data.hpp:#pragma once
+Data.hpp:struct Data {
+Data.hpp:	char* str;
+Data.hpp:};
+main.cpp:/* ************************************************************************** */
+main.cpp:/*                                                                            */
+main.cpp:/*                                                        :::      ::::::::   */
+main.cpp:/*   main.cpp                                           :+:      :+:    :+:   */
+main.cpp:/*                                                    +:+ +:+         +:+     */
+main.cpp:/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+main.cpp:/*                                                +#+#+#+#+#+   +#+           */
+main.cpp:/*   Created: 2025/02/17 14:49:13 by joao-pol          #+#    #+#             */
+main.cpp:/*   Updated: 2025/02/17 17:37:34 by joao-pol         ###   ########.fr       */
+main.cpp:/*                                                                            */
+main.cpp:/* ************************************************************************** */
+main.cpp:#include "Serializer.hpp"
+main.cpp:int main()
+main.cpp:{
+main.cpp:	std::string str = "Hello, world!";
+main.cpp:	Data data;
+main.cpp:	std::cout << "Before Serialize(pointer address)" << std::endl;
+main.cpp:	std::cout << &data << std::endl;
+main.cpp:	std::cout << std::endl << "After Serialize" << std::endl;
+main.cpp:	uintptr_t raw = Serializer::serialize(&data);
+main.cpp:	std::cout << raw << std::endl;
+main.cpp:	std::cout << std::endl << "After deSerialize" << std::endl;
+main.cpp:	Data* deserialized = Serializer::deserialize(raw);
+main.cpp:	std::cout << deserialized << std::endl;
+main.cpp:	if (&data == deserialized)
+main.cpp:		std::cout << std::endl << "Great Success!" << std::endl;
+main.cpp:	else
+main.cpp:		std::cout << std::endl << "Oh no!" << std::endl;
+main.cpp:}
+Serializer.cpp:/* ************************************************************************** */
+Serializer.cpp:/*                                                                            */
+Serializer.cpp:/*                                                        :::      ::::::::   */
+Serializer.cpp:/*   Serializer.cpp                                     :+:      :+:    :+:   */
+Serializer.cpp:/*                                                    +:+ +:+         +:+     */
+Serializer.cpp:/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+Serializer.cpp:/*                                                +#+#+#+#+#+   +#+           */
+Serializer.cpp:/*   Created: 2025/02/17 17:15:28 by joao-pol          #+#    #+#             */
+Serializer.cpp:/*   Updated: 2025/02/17 17:26:12 by joao-pol         ###   ########.fr       */
+Serializer.cpp:/*                                                                            */
+Serializer.cpp:/* ************************************************************************** */
+Serializer.cpp:#include "Serializer.hpp"
+Serializer.cpp:#include "Data.hpp"
+Serializer.cpp:Serializer::Serializer () {}
+Serializer.cpp:Serializer::~Serializer () {}
+Serializer.cpp:Serializer::Serializer(const Serializer& copy) {
+Serializer.cpp:	(void)copy;
+Serializer.cpp:}
+Serializer.cpp:Serializer& Serializer::operator=(const Serializer& other) {
+Serializer.cpp:	(void)other;
+Serializer.cpp:	return *this;
+Serializer.cpp:}
+Serializer.cpp:uintptr_t Serializer::serialize(Data *ptr) {
+Serializer.cpp:	return reinterpret_cast<uintptr_t>(ptr);
+Serializer.cpp:}
+Serializer.cpp:Data* Serializer::deserialize(uintptr_t raw) {
+Serializer.cpp:	return reinterpret_cast<Data*>(raw);
+Serializer.cpp:}
+Serializer.hpp:/* ************************************************************************** */
+Serializer.hpp:/*                                                                            */
+Serializer.hpp:/*                                                        :::      ::::::::   */
+Serializer.hpp:/*   Serializer.hpp                                     :+:      :+:    :+:   */
+Serializer.hpp:/*                                                    +:+ +:+         +:+     */
+Serializer.hpp:/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+Serializer.hpp:/*                                                +#+#+#+#+#+   +#+           */
+Serializer.hpp:/*   Created: 2025/02/17 16:34:27 by joao-pol          #+#    #+#             */
+Serializer.hpp:/*   Updated: 2025/02/17 17:34:06 by joao-pol         ###   ########.fr       */
+Serializer.hpp:/*                                                                            */
+Serializer.hpp:/* ************************************************************************** */
+Serializer.hpp:#pragma once
+Serializer.hpp:#include <stdint.h>
+Serializer.hpp:#include <string>
+Serializer.hpp:#include <iostream>
+Serializer.hpp:#include <sys/types.h>
+Serializer.hpp:#include "Data.hpp"
+Serializer.hpp:class Serializer {
+Serializer.hpp:	private:
+Serializer.hpp:	Serializer();
+Serializer.hpp:	~Serializer();
+Serializer.hpp:	Serializer(const Serializer& copy);
+Serializer.hpp:	Serializer& operator=(const Serializer& other);
+Serializer.hpp:	public:
+Serializer.hpp:	static uintptr_t serialize(Data *ptr);
+Serializer.hpp:	static Data* deserialize(uintptr_t raw);
+Serializer.hpp:};
+Makefile:# **************************************************************************** #
+Makefile:#                                                                              #
+Makefile:#                                                         :::      ::::::::    #
+Makefile:#    Makefile                                           :+:      :+:    :+:    #
+Makefile:#                                                     +:+ +:+         +:+      #
+Makefile:#    By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+         #
+Makefile:#                                                 +#+#+#+#+#+   +#+            #
+Makefile:#    Created: 2024/12/03 09:59:30 by joao-pol          #+#    #+#              #
+Makefile:#    Updated: 2025/02/03 14:00:03 by joao-pol         ###   ########.fr        #
+Makefile:#                                                                              #
+Makefile:# **************************************************************************** #
+Makefile:CC = c++
+Makefile:NAME = serialize
+Makefile:SRCS = main.cpp Serializer.cpp
+Makefile:CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+Makefile:ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
+Makefile:OBJS = $(SRCS:.cpp=.o)
+Makefile:all : $(NAME)
+Makefile:$(NAME): $(OBJS)
+Makefile:	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+Makefile:%.o: %.cpp
+Makefile:	@$(CC) $(CFLAGS) -c $< -o $@
+Makefile:clean :
+Makefile:	rm -fr *.o
+Makefile:fclean : clean
+Makefile:	rm -fr $(NAME)
+Makefile:re : fclean all
+Makefile:asan : fclean
+Makefile:	$(CC) $(CFLAGS) $(ASANFLAGS) $(SRCS) -o $(NAME)
+Makefile:	./$(NAME)
+Makefile:va : re
+Makefile:	valgrind -q --leak-check=full --show-leak-kinds=all ./$(NAME)
+Makefile:.PHONY : all fclean re

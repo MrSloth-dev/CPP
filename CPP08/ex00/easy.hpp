@@ -16,7 +16,7 @@
 #include <exception>
 
 template <typename T>
-typename T::iterator easyfind(T container,int n) {
+typename T::iterator easyfind(T container, int n) {
 	if (std::find(container.begin(), container.end(), n) != container.end())
 		return std::find(container.begin(), container.end(), n);
 	else

@@ -15,7 +15,8 @@
 #include <cctype>
 #include <iostream>
 
-template <typename T, typename F> void	iter(T array, unsigned int size, F fun) {
+template <typename T, typename F>
+void	iter(T array, unsigned int size, F fun) {
 	unsigned int i = 0;
 	while (i < size) {
 		fun(array[i++]);

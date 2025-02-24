@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "Array.hpp"
-#include <array>
 #include <cstdlib>
 #include <exception>
 #include <stdlib.h>

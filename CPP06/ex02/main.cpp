@@ -17,7 +17,7 @@ class D : public Base { } ;
 int main()
 {
 	std::srand(time(0));
-	Base* class1 = generate();
+	Base* class1 = NULL;
 	identify(class1);
 	identify(*class1);
 	Base* class2 = generate();

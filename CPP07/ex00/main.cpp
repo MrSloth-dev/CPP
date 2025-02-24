@@ -15,32 +15,46 @@
 int main()
 {
 	{
+		std::cout << std::endl << "Test 1" << std::endl;
 		int a = 10;
 		int b = 20;
 
-		swap(a, b);
+		::swap(a, b);
 		std::cout << a << " " << b << std::endl;
 	}
 	{
+		std::cout << std::endl << "Test 2" << std::endl;
 		std::string x = ", World!";
 		std::string y = "Hello";
-		swap(x, y);
+		::swap(x, y);
 
 		std::cout << x + y << std::endl;
 	}
 	{
+		std::cout << std::endl << "Test 3" << std::endl;
 		std::string y = "Hallo";
-		swap(y[1], y[4]);
+		::swap(y[1], y[4]);
 
 		std::cout << y << std::endl;
 	}
 	{
-		std::cout << max(10, 20) << std::endl;
+		int a = 10;
+		int b = 20;
+		std::cout << std::endl << "Test 4" << std::endl;
+		std::cout << ::max(a, b) << std::endl;
+		::swap(a, b);
+		std::cout << "a is " << a << ", b is " << b  << std::endl;
 	}
 	{
-		std::cout << min(120, 200) << std::endl;
+		int a = 10;
+		int b = 20;
+		std::cout << std::endl << "Test 5" << std::endl;
+		std::cout << ::min(a, b) << std::endl;
+		::swap(a, b);
+		std::cout << "a is " << a << ", b is " << b  << std::endl;
 	}
 	{
+		std::cout << std::endl << "Test 6" << std::endl;
 		std::cout << ::min("hello", "helllo") << std::endl;
 		std::cout << ::max("hello", "helllo") << std::endl;
 		std::cout << ::max("a", "A") << std::endl;

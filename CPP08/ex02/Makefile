@@ -12,7 +12,7 @@
 
 CC = c++
 NAME = MutantStack
-SRCS = main.cpp MutantStack.cpp
+SRCS = main.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
 OBJS = $(SRCS:.cpp=.o)

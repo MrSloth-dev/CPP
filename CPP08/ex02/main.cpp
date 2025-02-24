@@ -10,130 +10,64 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Span.hpp"
-#include <algorithm>
-#include <exception>
-#include <vector>
-#include <iostream>
+#include "MutantStack.hpp"
 
 int main()
-{
 	{
-		std::cout << "\nTest 1" << std::endl;
-		try {
-		Span vector(42);
-		vector.addNumber(10);
-		vector.addNumber(20);
-		vector.addNumber(40);
-		vector.addNumber(400);
-		vector.addNumber(123);
-		vector.addNumber(723);
-		vector.addNumber(12);
-		vector.fillVector();
-		vector.printVector();
-		std::cout << vector.shortestSpan() << std::endl;
-		std::cout << vector.longestSpan() << std::endl;
-		}
-		catch (Span::MaxSizeReachedException &e) {
-			std:: cerr << "Tried to add more numbers that it can hold!" << std::endl;
-		}
-		catch (Span::NoSpanException &e) {
-			std:: cerr << "No span to calculate, need 2 or more elements" << std::endl;
-		}
-		catch (std::exception &e) {
-			std::cerr << "Unexpected exception" << std::endl;
-		}
-
-	}
 	{
-		std::cout << "\nTest 2" << std::endl;
-		try {
-			Span vector(10);
-			vector.fillVector();
-			vector.addNumber(100);
-			std::cout << vector.shortestSpan() << std::endl;
-			std::cout << vector.longestSpan() << std::endl;
-		}
-		catch (Span::MaxSizeReachedException &e) {
-			std:: cerr << "Tried to add more numbers that it can hold!" << std::endl;
-		}
-		catch (Span::NoSpanException &e) {
-			std:: cerr << "No span to calculate, need 2 or more elements" << std::endl;
-		}
-		catch (std::exception &e) {
-			std::cerr << "Unexpected exception" << std::endl;
+		std::cout << std::endl << "Normal iterator" << std::endl;
+		MutantStack<int> mutStack;
+		mutStack.push(10);
+		mutStack.push(20);
+		mutStack.push(30);
+		mutStack.push(40);
+		mutStack.push(50);
+		mutStack.push(60);
+		for (MutantStack<int>::iterator ite = mutStack.begin(); ite != mutStack.end(); ite++){
+			*ite += 1;
+			std::cout << *ite << std::endl;
 		}
 	}
 	{
-		std::cout << "\nTest 3" << std::endl;
-		try {
-			Span vector(10);
-			std::cout << vector.shortestSpan() << std::endl;
-			std::cout << vector.longestSpan() << std::endl;
-		}
-		catch (Span::MaxSizeReachedException &e) {
-			std:: cerr << "Tried to add more numbers that it can hold!" << std::endl;
-		}
-		catch (Span::NoSpanException &e) {
-			std:: cerr << "No span to calculate, need 2 or more elements" << std::endl;
-		}
-		catch (std::exception &e) {
-			std::cerr << "Unexpected exception" << std::endl;
+		std::cout << std::endl << "constant iterator" << std::endl;
+		MutantStack<int> mutStack;
+		mutStack.push(10);
+		mutStack.push(20);
+		mutStack.push(30);
+		mutStack.push(40);
+		mutStack.push(50);
+		mutStack.push(60);
+		for (MutantStack<int>::const_iterator ite = mutStack.cbegin(); ite != mutStack.cend(); ite++) {
+			// *ite += 1;
+			std::cout << *ite << std::endl;
 		}
 	}
 	{
-		std::cout << "\nTest 4" << std::endl;
-		try {
-			Span vector(10);
-			vector.addNumber(10);
-			std::cout << vector.shortestSpan() << std::endl;
-			std::cout << vector.longestSpan() << std::endl;
-		}
-		catch (Span::MaxSizeReachedException &e) {
-			std:: cerr << "Tried to add more numbers that it can hold!" << std::endl;
-		}
-		catch (Span::NoSpanException &e) {
-			std:: cerr << "No span to calculate, need 2 or more elements" << std::endl;
-		}
-		catch (std::exception &e) {
-			std::cerr << "Unexpected exception" << std::endl;
+		std::cout << std::endl << "reverse iterator" << std::endl;
+		MutantStack<int> mutStack;
+		mutStack.push(10);
+		mutStack.push(20);
+		mutStack.push(30);
+		mutStack.push(40);
+		mutStack.push(50);
+		mutStack.push(60);
+		for (MutantStack<int>::reverse_iterator ite = mutStack.rbegin(); ite != mutStack.rend(); ite++) {
+			*ite += 1;
+			std::cout << *ite << std::endl;
 		}
 	}
 	{
-		std::cout << "\nTest 5" << std::endl;
-		try {
-			Span vector(100);
-			vector.fillVector();
-			std::cout << vector.shortestSpan() << std::endl;
-			std::cout << vector.longestSpan() << std::endl;
-		}
-		catch (Span::MaxSizeReachedException &e) {
-			std:: cerr << "Tried to add more numbers that it can hold!" << std::endl;
-		}
-		catch (Span::NoSpanException &e) {
-			std:: cerr << "No span to calculate, need 2 or more elements" << std::endl;
-		}
-		catch (std::exception &e) {
-			std::cerr << "Unexpected exception" << std::endl;
-		}
-	}
-	{
-		std::cout << "\nTest 4" << std::endl;
-		try {
-			Span vector(10);
-			vector.addNumber(10);
-			vector.addNumber(-10);
-			std::cout << vector.shortestSpan() << std::endl;
-			std::cout << vector.longestSpan() << std::endl;
-		}
-		catch (Span::MaxSizeReachedException &e) {
-			std:: cerr << "Tried to add more numbers that it can hold!" << std::endl;
-		}
-		catch (Span::NoSpanException &e) {
-			std:: cerr << "No span to calculate, need 2 or more elements" << std::endl;
-		}
-		catch (std::exception &e) {
-			std::cerr << "Unexpected exception" << std::endl;
+		std::cout << std::endl << "constante reverse iterator" << std::endl;
+		MutantStack<int> mutStack;
+		mutStack.push(10);
+		mutStack.push(20);
+		mutStack.push(30);
+		mutStack.push(40);
+		mutStack.push(50);
+		mutStack.push(60);
+		for (MutantStack<int>::const_reverse_iterator ite = mutStack.crbegin(); ite != mutStack.crend(); ite++) {
+			// *ite += 1;
+			std::cout << *ite << std::endl;
 		}
 	}
 }

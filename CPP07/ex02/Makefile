@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = c++
-NAME = array
+NAME = Array
 SRCS = main.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer

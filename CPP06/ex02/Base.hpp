@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <exception>
 
 
 class Base {

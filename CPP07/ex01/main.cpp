@@ -1,4 +1,4 @@
-/2* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
@@ -41,6 +41,7 @@ public:
 template <typename T>void print(T a) {
 	std::cout << a <<std::endl;
 }
+
 int main()
 {
 	{
@@ -64,6 +65,7 @@ int main()
 		std::cout << std::endl;
 		std::string	array[] = {"hola" , "nuestros", "amigos", "estamos", "felices"};
 		::iter(array, 5, test::Capitalize);
+
 		for (int i = 0; i < 5; i++) {
 			std::cout << array[i] << std::endl;
 		}
