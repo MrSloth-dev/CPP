@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 CC = c++
-NAME = span
-SRCS = main.cpp Span.cpp
+NAME = MutantStack
+SRCS = main.cpp MutantStack.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
 OBJS = $(SRCS:.cpp=.o)

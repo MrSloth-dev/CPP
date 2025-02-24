@@ -12,20 +12,21 @@
 
 #include "Span.hpp"
 #include <algorithm>
+#include <ctime>
 #include <climits>
 #include <cstdlib>
 #include <vector>
+#include <iostream>
 
-int	Span::_curSize = 0;
-
-Span::Span(unsigned int N): _vector(0), _maxSize(N) { };
+Span::Span(unsigned int N): _vector(0), _maxSize(N), _curSize(0) { };
 Span::~Span() {};
 
-Span::Span(const Span& copy): _vector(copy._vector), _maxSize(copy._maxSize) { }
+Span::Span(const Span& copy): _vector(copy._vector), _maxSize(copy._maxSize), _curSize(0) { }
 Span& Span::operator=(const Span& copy) {
 	if (this != &copy) {
 		_vector = copy._vector;
 		_maxSize = copy._maxSize;
+		_curSize = copy._curSize;
 	}
 	return *this;
 }
@@ -46,32 +47,44 @@ void Span::addNumber(int newNumber) {
 }
 
 unsigned int Span::shortestSpan() {
-	unsigned int minSpan = INT_MAX;
-	if (getcurSize() < 2)
-		throw NoSpanException();
-	std::sort(_vector.begin(), _vector.end());
-	std::vector<int>::iterator start = _vector.begin();
-	for (unsigned int i = 0; i < _vector.size() - 1; i++) {
-		unsigned int span = abs(*start - *(++start));
-		if (span < minSpan)
-			minSpan = span;
-	}
-	return minSpan;
+    unsigned int minSpan = UINT_MAX;
+    if (getcurSize() < 2)
+        throw NoSpanException();
+    std::sort(_vector.begin(), _vector.end());
+    for (unsigned int i = 0; i < _vector.size() - 1; i++) {
+        unsigned int span = _vector[i + 1] - _vector[i];
+        if (span < minSpan)
+            minSpan = span;
+    }
+    return minSpan;
 }
 
 unsigned int Span::longestSpan() {
 	if (getcurSize() < 2)
 		throw NoSpanException();
-	unsigned int maxSpan = 0;
 	std::sort(_vector.begin(), _vector.end());
-	std::vector<int>::iterator start = _vector.begin();
-	for (unsigned int i = 0; i < _vector.size() - 1; i++) {
-		unsigned int span = abs(*start - *(++start));
-		if (span > maxSpan)
-			maxSpan = span;
-	}
-	return maxSpan;
+	int start = _vector.front();
+	int end = _vector.back();
+	std::cout <<"min val: " << start;
+	std::cout <<"  max val: " << end << std::endl << std::endl;;
+	return end - start;
 }
+
+void	Span::fillVector() {
+	srand(time(0));
+	while (getcurSize() < getmaxSize())
+		addNumber(static_cast<int>(rand() % (_maxSize * 100)));
+}
+
+void	Span::printVector() {
+	std::sort(_vector.begin(), _vector.end());
+	for (std::vector<int>::iterator it = _vector.begin(); it != _vector.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
+
+
 const char * Span::MaxSizeReachedException::what() const throw() {
 	return "Vector has its max size reached";
 }

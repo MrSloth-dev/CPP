@@ -18,7 +18,7 @@ class Span {
 	private:
 	std::vector<int> _vector;
 	unsigned int _maxSize;
-	static int _curSize;
+	unsigned int _curSize;
 
 	Span();
 	public:
@@ -32,6 +32,8 @@ class Span {
 
 	unsigned int getcurSize();
 	unsigned int getmaxSize();
+	void	fillVector();
+	void	printVector();
 
 	class MaxSizeReachedException: public std::exception{
 		const char * what() const throw();
