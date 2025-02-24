@@ -12,6 +12,7 @@
 
 #include "ScalarConverter.hpp"
 #include <cctype>
+#include <cmath>
 #include <iomanip>
 #include <string>
 #include <sstream>
@@ -44,8 +45,17 @@ void ScalarConverter::convert(const std::string &str) {
 
 	std::istringstream	iss(str);
 	double				val;
+	std::string	remainder;
+	std::string dotcheck = iss.str();
 
 	if (iss >> val) {
+		iss >> remainder;
+		if ((remainder.length() != 0 && remainder != "f") || (remainder == "f" && dotcheck.find('.') == dotcheck.npos)) {
+			std::cout << "Error: Invalid Input" << std::endl;
+			return ;
+		}
+
+
 		if (val >= 0 && val <= 127 && val == static_cast<int>(val)) {
 				if (isprint(static_cast<int>(val)))
 					std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
