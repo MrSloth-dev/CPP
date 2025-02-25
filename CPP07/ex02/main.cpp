@@ -135,7 +135,8 @@ int main()
 		}
 		for (int i = 0 ; i < list.size(); i++)
 			if (list[i] != numbers[i])
-				std::cerr << "Number don't match, copy not precise";
-		delete [] numbers;
+				std::cerr << "Number don't match, copy not precise" << std::endl;
+			else
+				std::cout << "   list[" << i<<"] is " << list[i] << std::endl << "numbers[" << i<<"] is " << numbers[i] << std::endl;
 	}
 }

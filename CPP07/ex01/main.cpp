@@ -36,6 +36,9 @@ public:
 				str[0] -= 32;
 				
 	}
+	static void	nonExistent(int i) {
+		(void)i;
+	}
 };
 
 template <typename T>void print(T a) {
@@ -45,6 +48,7 @@ template <typename T>void print(T a) {
 int main()
 {
 	{
+		std::cout << std::endl << "Test 1" << std::endl;
 		int	array[] = {2 , 4, 6, 8, 10};
 		::iter(array, 5, test::addFive);
 		for (int i = 0; i < 5; i++) {
@@ -53,6 +57,7 @@ int main()
 
 	}
 	{
+		std::cout << std::endl << "Test 2" << std::endl;
 		std::cout << std::endl;
 		std::string	array[] = {"hola" , "nuestros", "amigos", "estamos", "felices"};
 		::iter(array, 5, test::upper);
@@ -62,6 +67,7 @@ int main()
 
 	}
 	{
+		std::cout << std::endl << "Test 3" << std::endl;
 		std::cout << std::endl;
 		std::string	array[] = {"hola" , "nuestros", "amigos", "estamos", "felices"};
 		::iter(array, 5, test::Capitalize);
@@ -71,14 +77,24 @@ int main()
 		}
 	}
 	{
+		std::cout << std::endl << "Test 4" << std::endl;
 		std::cout << std::endl;
 		std::string	array[] = {"hola" , "nuestros", "amigos", "estamos", "felices"};
 		::iter(array, 5, ::print<std::string>);
 	}
 	{
+		std::cout << std::endl << "Test 5" << std::endl;
 		std::cout << std::endl;
 		int	array[] = {2 , 4, 6, 8, 10};
 		::iter(array, 5, test::addFive);
+		::iter(array, 5, ::print<int>);
+
+	}
+	{
+		std::cout << std::endl << "Test 6" << std::endl;
+		std::cout << std::endl;
+		int	array[] = {2 , 4, 6, 8, 10};
+		::iter(array, 5, test::nonExistent);
 		::iter(array, 5, ::print<int>);
 
 	}
