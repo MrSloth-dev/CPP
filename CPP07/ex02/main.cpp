@@ -124,7 +124,7 @@ int main()
 		std::cout << std::endl << "Copy Random Test" << std::endl;
 		srand(time(0));
 		const unsigned int size = 10;
-		int* numbers = new int(size);
+		int* numbers = new int[size];
 
 		Array<int> list(size);
 		for (int i = 0 ; i < list.size(); i++)
@@ -136,5 +136,6 @@ int main()
 		for (int i = 0 ; i < list.size(); i++)
 			if (list[i] != numbers[i])
 				std::cerr << "Number don't match, copy not precise";
+		delete [] numbers;
 	}
 }

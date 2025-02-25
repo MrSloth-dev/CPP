@@ -14,7 +14,7 @@ CC = c++
 NAME = easy
 SRCS = main.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
-ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
+ASANFLAGS = -fsanitize=address,leak,undefined -fno-omit-frame-pointer -g
 OBJS = $(SRCS:.cpp=.o)
 
 

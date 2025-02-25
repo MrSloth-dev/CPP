@@ -14,6 +14,7 @@
 #include <exception>
 #include <vector>
 #include <iostream>
+#include <deque>
 
 int main()
 {
@@ -30,11 +31,11 @@ int main()
 			std::cerr << find << " is not in our container" << std::endl;
 	}
 	{
-		const char find = 'b';
-		std::vector<int> temp;
-		std::cout << std::endl << "Trying to find " << find << " in vector"<< std::endl;
+		const int find = 90;
+		std::deque<int> temp;
+		std::cout << std::endl << "Trying to find " << find << " in deque"<< std::endl;
 		for (int i = 0; i < 10; i++)
-			temp.push_back(static_cast<char>(i * 2));
+			temp.push_back(i * 2);
 		try {
 			::easyfind(temp, find);
 			std::cout << find << " is in our container" << std::endl;
