@@ -136,5 +136,42 @@ int main()
 			std::cerr << "Unexpected exception" << std::endl;
 		}
 	}
+	{
+		std::cout << "\nTest 5" << std::endl;
+		try {
+			Span vector(1);
+			vector.addNumber(10);
+			vector.addNumber(-10);
+			std::cout << vector.shortestSpan() << std::endl;
+			std::cout << vector.longestSpan() << std::endl;
+		}
+		catch (Span::MaxSizeReachedException &e) {
+			std:: cerr << "Tried to add more numbers that it can hold!" << std::endl;
+		}
+		catch (Span::NoSpanException &e) {
+			std:: cerr << "No span to calculate, need 2 or more elements" << std::endl;
+		}
+		catch (std::exception &e) {
+			std::cerr << "Unexpected exception" << std::endl;
+		}
+	}
+	{
+		std::cout << "\nTest 6" << std::endl;
+		try {
+			Span vector(1);
+			vector.addNumber(10);
+			std::cout << vector.shortestSpan() << std::endl;
+			std::cout << vector.longestSpan() << std::endl;
+		catch (Span::MaxSizeReachedException &e) {
+		}
+			std:: cerr << "Tried to add more numbers that it can hold!" << std::endl;
+		}
+		catch (Span::NoSpanException &e) {
+			std:: cerr << "No span to calculate, need 2 or more elements" << std::endl;
+		}
+		catch (std::exception &e) {
+			std::cerr << "Unexpected exception" << std::endl;
+		}
+	}
 }
 
