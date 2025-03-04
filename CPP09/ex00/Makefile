@@ -12,7 +12,7 @@
 
 CC = c++
 NAME = btc
-SRCS = main.cpp
+SRCS = main.cpp BitcoinExchange.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
 OBJS = $(SRCS:.cpp=.o)
