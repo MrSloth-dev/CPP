@@ -8,16 +8,18 @@
 class BitcoinExchange {
 	private:
 	static BitcoinExchange* _instance;
-	std::map<std::string, float> _map;
+	std::map<std::string, float> _DB;
 	BitcoinExchange(const BitcoinExchange& copy);
 	BitcoinExchange& operator=(const BitcoinExchange& copy);
 	BitcoinExchange();
+	bool checkDate(std::string date);
+	bool checkValue(std::string value);
 	public:
 	~BitcoinExchange();
 	static BitcoinExchange& getInstance();
-	bool checkDate(std::string date);
-	bool checkValue(std::string value);
 	bool addLine(std::string value, float fvalue);
+	bool checkDatabase();
+	bool checkInput();
 
 	class NoDatabaseException :  public std::exception {
 		virtual const char* what() const throw();
