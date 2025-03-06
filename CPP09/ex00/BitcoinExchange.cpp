@@ -1,40 +1,14 @@
 
 #include "BitcoinExchange.hpp"
-#include <sstream>
-#include <fstream>
-
-
-#include <ctime>
-/*
-class BitcoinExchange {
-	private:
-	static BitcoinExchange* _instance;
-	std::map<std::string, float> _map;
-	BitcoinExchange(const BitcoinExchange& copy);
-	BitcoinExchange& operator=(const BitcoinExchange& copy);
-	BitcoinExchange();
-	public:
-	~BitcoinExchange();
-	static BitcoinExchange& getInstance();
-	bool checkDate(std::string date);
-	bool checkValue(std::string value);
-	bool addLine(std::string value, float fvalue);
-
-	class InvalidDateException :  public std::exception {
-		virtual const char* what() const throw();
-	};
-	class InvalidValueException :  public std::exception {
-		virtual const char* what() const throw();
-	};
-
-};
-*/
+#include <algorithm>
+#include <cctype>
 
 BitcoinExchange& BitcoinExchange::getInstance() {
 	if (_instance == NULL)
 		_instance = new BitcoinExchange();
 	return *_instance;
 }
+
 BitcoinExchange* BitcoinExchange::_instance = NULL;
 
 BitcoinExchange::BitcoinExchange() {
@@ -54,12 +28,6 @@ BitcoinExchange::BitcoinExchange() {
 		iss >> dates >> value;
 		_DB[dates] = value;
 	}
-
-
-
-
-
-
 }
 
 BitcoinExchange::~BitcoinExchange() {
@@ -67,6 +35,8 @@ BitcoinExchange::~BitcoinExchange() {
 }
 
 bool BitcoinExchange::checkDate(std::string date) {
+	if (date.length() != 10)
+		return false;
 	std::string creation = "2009-01-02";
 	std::time_t t = time(0);
 	std::tm* now = std::localtime(&t);
@@ -107,7 +77,8 @@ bool BitcoinExchange::checkDatabase() {
 		line.replace(line.find(','), 1, " ");
 		std::istringstream iss(line);
 		std::string dates;
-		float value;
+		int value;
+		std::string remainder;
 		iss >> dates >> value;
 		try {
 		if (!this->checkDate(dates))
@@ -117,23 +88,106 @@ bool BitcoinExchange::checkDatabase() {
 		}
 		catch (std::exception &e) {
 			std::cerr << e.what() << std::endl;
-			std::cerr << "Error -> " << line << std::endl;
+			std::cerr << "Error in Database -> " << line << std::endl;
 			input.close();
 			return false;
 		}
-		// std::cout << "dates: " << dates << std::endl;
-		// std::cout << "value: " << value << std::endl;
 	}
 	input.close();
 	return true;
 }
-bool BitcoinExchange::checkInput() {
-	std::cout <<"Hello" << std::endl;
+
+bool BitcoinExchange::checkInput(std::string argv) {
+	std::ifstream input;
+	std::string line;
+	try {
+		if (argv.length() < 5
+			|| argv.find('.') == argv.npos
+			|| argv.substr(argv.find_last_of('.')) != ".txt") {
+			std::cerr << "Error: only '.txt' extension is valid." << std::endl;
+			return false;
+		}
+		input.open(argv.c_str(), std::ios::in);
+		if (!input.is_open() || input.fail())
+			throw BitcoinExchange::NoInputException();
+		input.close();
+	}
+	catch(BitcoinExchange::NoInputException &e) {
+		input.close();
+		std::cerr << "Error reading Input!" << std::endl;
+		return false;
+
+	}
+	catch(std::exception &e) {
+		std::cerr << e.what() << std::endl;
+		std::cerr << "Error in Input -> " << line << std::endl;
+		input.close();
+		return false;
+	}
 	return true;
 }
+double BitcoinExchange::getRate(std::string date) {
+	if (_DB.find(date) != _DB.end())
+		return _DB[date];
+	return -1;
+	
+
+}
+void BitcoinExchange::parseInput(std::string argv) {
+	BitcoinExchange& btc = BitcoinExchange::getInstance();
+	std::ifstream input;
+	std::string line;
+	input.open(argv.c_str(), std::ios::in);
+	getline(input, line);
+	line.erase(std::remove_if(line.begin(), line.end(), std::ptr_fun<int, int>(isspace)), line.end());
+	if (line != "date|value") {
+		std::cerr << "Error: wrong header." << std::endl;
+		return ;
+	}
+	while (getline(input, line)) {
+		if (line.length() == 0 || line == "date | value")
+			continue;
+		std::istringstream iss(line);
+		std::string date;
+		std::string sep;
+		double value;
+		iss >> date >> sep >> value;
+		if (checkDate(date) == false)
+			std::cerr << "Error: bad input => " << date << std::endl;
+		else if (value < 0)
+			std::cerr << "Error: not a positive number." << std::endl;
+		else if (value > 1000)
+			std::cerr << "Error: too large a number." << std::endl;
+		else if (btc.getRate(date) != -1) {
+
+			std::cout << date << " => " << value << " = " << value * btc.getRate(date) << std::endl;
+		}
+			//rate not found
+		else {
+			std::map<std::string, float>::iterator less = _DB.begin();
+			for (std::map<std::string, float>::iterator ite = less; ite != _DB.end(); ++ite) {
+				if (ite->first < date)
+					less = ite;
+				else
+					break;
+			}
+			std::cout << date << " => " << value << " = " << value * less->second << std::endl;
+		}
+
+	}
+	input.close();
+}
+
+
+
+
+// Exceptions
 
 const char* BitcoinExchange::NoDatabaseException::what() const throw() {
 	return "Error reading Database!";
+}
+const char* BitcoinExchange::NoInputException::what() const throw() {
+	return "Error reading Input!";
 }
 const char* BitcoinExchange::InvalidDateException::what() const throw() {
 	return "Invalid Date!";

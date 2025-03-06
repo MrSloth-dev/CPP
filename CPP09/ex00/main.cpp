@@ -18,12 +18,12 @@
 int main(int argc, char * argv[])
 {
 	(void)argc;
-	/* if (argc != 2) {
-		std::cout << "Error: Usage : ./btc <path/to/file>" << std::endl;
+	if (argc != 2) {
+		std::cout << "Error: could not open file" << std::endl;
 		return 1;
-	} */
+	}
 	BitcoinExchange& btc = BitcoinExchange::getInstance();
-	btc.checkInput();
-	std::cout << argv[1] << std::endl;
+	if (btc.checkInput(argv[1]))
+		btc.parseInput(argv[1]);
 }
-
+ 

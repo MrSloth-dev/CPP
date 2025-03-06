@@ -4,6 +4,10 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <cmath>
+#include <sstream>
+#include <fstream>
+#include <ctime>
 
 class BitcoinExchange {
 	private:
@@ -12,16 +16,25 @@ class BitcoinExchange {
 	BitcoinExchange(const BitcoinExchange& copy);
 	BitcoinExchange& operator=(const BitcoinExchange& copy);
 	BitcoinExchange();
-	bool checkDate(std::string date);
-	bool checkValue(std::string value);
-	public:
-	~BitcoinExchange();
-	static BitcoinExchange& getInstance();
+	static bool checkDate(std::string date);
+	static bool checkValue(std::string value);
 	bool addLine(std::string value, float fvalue);
 	bool checkDatabase();
-	bool checkInput();
+	double getRate(std::string date);
+	public:
+	~BitcoinExchange();
+	void printMap() {
+		for (std::map<std::string, float>::iterator ite = _DB.begin(); ite != _DB.end();++ite)
+			std::cout << "Date: " << ite->first <<" and value " << ite->second << std::endl;
+	};
+	static BitcoinExchange& getInstance();
+	static bool checkInput(std::string argv);
+	void parseInput(std::string argv);
 
 	class NoDatabaseException :  public std::exception {
+		virtual const char* what() const throw();
+	};
+	class NoInputException :  public std::exception {
 		virtual const char* what() const throw();
 	};
 	class InvalidDateException :  public std::exception {
