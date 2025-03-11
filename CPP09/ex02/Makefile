@@ -12,7 +12,7 @@
 
 CC = c++
 CC_DEBUG = g++
-NAME = RPN
+NAME = PmergeMe
 SRCS = main.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
@@ -23,7 +23,6 @@ all : $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
-
 
 debug : fclean
 	$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)

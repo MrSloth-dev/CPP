@@ -22,10 +22,7 @@ class BitcoinExchange {
 	double getRate(std::string date);
 	public:
 	~BitcoinExchange();
-	void printMap() {
-		for (std::map<std::string, float>::iterator ite = _DB.begin(); ite != _DB.end();++ite)
-			std::cout << "Date: " << ite->first <<" and value " << ite->second << std::endl;
-	};
+	void printMap();
 	static BitcoinExchange& getInstance();
 	static bool checkInput(std::string argv);
 	void parseInput(std::string argv);

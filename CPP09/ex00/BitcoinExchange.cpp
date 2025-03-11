@@ -34,6 +34,11 @@ BitcoinExchange::~BitcoinExchange() {
 	delete _instance;
 }
 
+void BitcoinExchange::printMap() {
+	for (std::map<std::string, float>::iterator ite = _DB.begin(); ite != _DB.end();++ite)
+		std::cout << "Date: " << ite->first <<" and value " << ite->second << std::endl;
+};
+
 bool BitcoinExchange::checkDate(std::string date) {
 	char sep1, sep2;
 	unsigned int year, month, day;
