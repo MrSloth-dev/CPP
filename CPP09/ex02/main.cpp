@@ -50,7 +50,6 @@ long	Stoi(std::string str)
 	}
 	return (res * neg);
 }
-
 int main(int argc, char*argv[]) {
 	std::stack<float> stck;
 	if (argc != 2) {
@@ -87,9 +86,9 @@ int main(int argc, char*argv[]) {
 		else if (token == "-") {
 			temp = stck.top();
 			stck.pop();
-			float temp2 = stck.top();
+			temp -= stck.top();
 			stck.pop();
-			stck.push(temp2 - temp);
+			stck.push(temp);
 		}
 		else if (token == "*") {
 			temp = stck.top();
@@ -101,9 +100,9 @@ int main(int argc, char*argv[]) {
 		else if (token == "/") {
 			temp = stck.top();
 			stck.pop();
-			float temp2 = stck.top();
+			temp /= stck.top();
 			stck.pop();
-			stck.push(temp2 / temp);
+			stck.push(temp);
 		}
 	}
 	if (stck.size() != 1) {
