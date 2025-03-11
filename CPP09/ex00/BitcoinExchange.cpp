@@ -50,9 +50,9 @@ bool BitcoinExchange::checkDate(std::string date) {
 	if (sep1 != sep2 || (sep1 != '-' && sep1 != '/'))
 		return false;
 	if (month == 2) {
-		if (year % 4 && day > 29)
+		if (year % 4 == 0 && day > 29)
 			return false;
-		if (year % 4 && year % 100 && day > 28)
+		if (year % 4 == 0 && year % 100 == 0 && day > 28)
 			return false;
 	}
 	if (month == 1 || month == 3|| month == 5|| month == 7|| month == 8|| month == 10|| month == 12)
@@ -75,6 +75,7 @@ bool BitcoinExchange::checkDate(std::string date) {
 bool BitcoinExchange::checkDatabase() {
 	std::string file = "./data.csv";
 	std::ifstream input;
+	int countLine = 0;
 	input.open(file.c_str(), std::ios::in);
 	try {
 		if (! input.is_open() || input.fail())
@@ -87,6 +88,7 @@ bool BitcoinExchange::checkDatabase() {
 	}
 	std::string line;
 	while (std::getline(input, line)) {
+		countLine++;
 		if (line.find(',') == line.npos || line == "date,exchange_rate")
 			continue;
 		line.replace(line.find(','), 1, " ");
@@ -103,7 +105,7 @@ bool BitcoinExchange::checkDatabase() {
 		}
 		catch (std::exception &e) {
 			std::cerr << e.what() << std::endl;
-			std::cerr << "Error in Database -> " << line << std::endl;
+			std::cerr << "Error in Database line "<< countLine << " -> " << line << std::endl;
 			input.close();
 			return false;
 		}

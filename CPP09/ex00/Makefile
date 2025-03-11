@@ -36,7 +36,7 @@ re : fclean all
 
 asan : fclean
 	$(CC) $(CFLAGS) $(ASANFLAGS) $(SRCS) -o $(NAME)
-	./$(NAME)
+	./$(NAME) ./annexes/input.txt
 
 va : re
 	valgrind -q --leak-check=full --show-leak-kinds=all ./$(NAME)
