@@ -13,7 +13,7 @@ BitcoinExchange* BitcoinExchange::_instance = NULL;
 
 BitcoinExchange::BitcoinExchange() {
 	if (!this->checkDatabase())
-		return ;
+		throw BitcoinExchange::InvalidDateException();
 	std::string file = "./data.csv";
 	std::ifstream input;
 	input.open(file.c_str(), std::ios::in);
@@ -35,23 +35,38 @@ BitcoinExchange::~BitcoinExchange() {
 }
 
 bool BitcoinExchange::checkDate(std::string date) {
-	if (date.length() != 10)
-		return false;
+	char sep1, sep2;
+	unsigned int year, month, day;
+	std::istringstream iss(date);
 	std::string creation = "2009-01-02";
 	std::time_t t = time(0);
 	std::tm* now = std::localtime(&t);
-	char sep1;
-	char sep2;
-	unsigned int year, month, day;
-	std::istringstream iss(date);
+
+	if (date.length() != 10)
+		return false;
+
 	iss >> year >> sep1 >> month >> sep2 >> day;
+
+	if (sep1 != sep2 || (sep1 != '-' && sep1 != '/'))
+		return false;
+	if (month == 2) {
+		if (year % 4 && day > 29)
+			return false;
+		if (year % 4 && year % 100 && day > 28)
+			return false;
+	}
+	if (month == 1 || month == 3|| month == 5|| month == 7|| month == 8|| month == 10|| month == 12)
+		if (day > 31)
+			return false;
+	if (month == 4 || month == 6|| month == 9|| month == 11)
+		if (day > 30)
+			return false;
+
 	std::tm then = {};
 	then.tm_year = year - 1900;
 	then.tm_mon = month - 1;
 	then.tm_mday = day;
 	if (date < creation || std::difftime( std::mktime(now), std::mktime(&then)) < 0)
-		return false;
-	if (sep1 != sep2 || (sep1 != '-' && sep1 != '/'))
 		return false;
 	return true;
 }

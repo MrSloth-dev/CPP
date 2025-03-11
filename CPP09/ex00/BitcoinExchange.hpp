@@ -1,12 +1,11 @@
 
 #pragma once
 #include <map>
-#include <vector>
 #include <string>
 #include <iostream>
-#include <cmath>
-#include <sstream>
 #include <fstream>
+#include <string>
+#include <sstream>
 #include <ctime>
 
 class BitcoinExchange {
@@ -43,6 +42,5 @@ class BitcoinExchange {
 	class InvalidValueException :  public std::exception {
 		virtual const char* what() const throw();
 	};
-
 };
 

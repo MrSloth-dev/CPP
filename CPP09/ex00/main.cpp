@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-#include <fstream>
-#include <string>
-#include <sstream>
 
 int main(int argc, char * argv[])
 {
@@ -22,8 +19,11 @@ int main(int argc, char * argv[])
 		std::cout << "Error: could not open file" << std::endl;
 		return 1;
 	}
-	BitcoinExchange& btc = BitcoinExchange::getInstance();
-	if (btc.checkInput(argv[1]))
-		btc.parseInput(argv[1]);
+	try {
+		BitcoinExchange& btc = BitcoinExchange::getInstance();
+		if (btc.checkInput(argv[1]))
+			btc.parseInput(argv[1]);
+	}
+	catch (std::exception &e ) { }
 }
  
