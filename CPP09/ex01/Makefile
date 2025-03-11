@@ -11,8 +11,9 @@
 # **************************************************************************** #
 
 CC = c++
+CC_DEBUG = g++
 NAME = RPN
-SRCS = main.cpp RPN.cpp
+SRCS = main.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
 OBJS = $(SRCS:.cpp=.o)
@@ -22,6 +23,10 @@ all : $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+
+
+debug : fclean
+	$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)
 
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
