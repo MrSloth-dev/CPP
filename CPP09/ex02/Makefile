@@ -13,7 +13,7 @@
 CC = c++
 CC_DEBUG = g++
 NAME = PmergeMe
-SRCS = main.cpp
+SRCS = main.cpp PmergeMe.cpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 ASANFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
 OBJS = $(SRCS:.cpp=.o)
@@ -40,7 +40,7 @@ re : fclean all
 
 asan : fclean
 	$(CC) $(CFLAGS) $(ASANFLAGS) $(SRCS) -o $(NAME)
-	./$(NAME)
+	./$(NAME) 0 1 2 3 4 5
 
 va : re
 	valgrind -q --leak-check=full --show-leak-kinds=all ./$(NAME)
