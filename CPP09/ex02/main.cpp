@@ -20,11 +20,10 @@ int main(int argc, char*argv[]) {
 		return 1;
 	}
 	PmergeMe pmm(argv);
-	pmm.print();
+	pmm.executeVector();
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}
 	return 0;
-
 }

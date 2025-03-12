@@ -52,6 +52,8 @@ bool BitcoinExchange::checkDate(std::string date) {
 
 	iss >> year >> sep1 >> month >> sep2 >> day;
 
+	if (month > 12 || month < 0)
+		return false;
 	if (sep1 != sep2 || (sep1 != '-' && sep1 != '/'))
 		return false;
 	if (month == 2) {
@@ -61,10 +63,10 @@ bool BitcoinExchange::checkDate(std::string date) {
 			return false;
 	}
 	if (month == 1 || month == 3|| month == 5|| month == 7|| month == 8|| month == 10|| month == 12)
-		if (day > 31)
+		if (day > 31 || day < 0)
 			return false;
 	if (month == 4 || month == 6|| month == 9|| month == 11)
-		if (day > 30)
+		if (day > 30 || day < 0)
 			return false;
 
 	std::tm then = {};
@@ -83,7 +85,7 @@ bool BitcoinExchange::checkDatabase() {
 	int countLine = 0;
 	input.open(file.c_str(), std::ios::in);
 	try {
-		if (! input.is_open() || input.fail())
+		if (!input.is_open() || input.fail())
 			throw BitcoinExchange::NoDatabaseException();
 	}
 	catch(std::exception &e) {
@@ -99,8 +101,7 @@ bool BitcoinExchange::checkDatabase() {
 		line.replace(line.find(','), 1, " ");
 		std::istringstream iss(line);
 		std::string dates;
-		int value;
-		std::string remainder;
+		float value;
 		iss >> dates >> value;
 		try {
 		if (!this->checkDate(dates))
