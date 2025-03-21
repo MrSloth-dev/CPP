@@ -22,11 +22,12 @@ class PmergeMe {
 	PmergeMe(char** argv);
 	~PmergeMe();
 	bool IsNumber(std::string str);
-	void pairUp(std::vector<int> vec, uint level);
+	std::vector<std::pair<int, int> > pairUp(std::vector<int> vec, uint level);
 	bool parseInput(char** argv);
 	void executeVector();
 	void executeDeque();
 	void printall();
+	std::vector<int> sortFordJohnson(std::vector<int> vec);
 
 	class InputException :  public std::exception {
 		virtual const char* what() const throw();
