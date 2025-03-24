@@ -59,7 +59,7 @@ bool BitcoinExchange::checkDate(std::string date) {
 	if (month == 2) {
 		if (year % 4 == 0 && day > 29)
 			return false;
-		if (year % 4 == 0 && year % 100 == 0 && day > 28)
+		if (((year % 4 == 0 && year % 100 == 0) || year % 4 == 1) && day > 28)
 			return false;
 	}
 	if (month == 1 || month == 3|| month == 5|| month == 7|| month == 8|| month == 10|| month == 12)
@@ -104,7 +104,7 @@ bool BitcoinExchange::checkDatabase() {
 		float value;
 		iss >> dates >> value;
 		try {
-		if (!this->checkDate(dates))
+		if (this->checkDate(dates) == false)
 			throw BitcoinExchange::InvalidDateException();
 		if (value < 0)
 			throw BitcoinExchange::InvalidValueException();
@@ -162,6 +162,7 @@ void BitcoinExchange::parseInput(std::string argv) {
 		std::string sep;
 		double value;
 		iss >> date >> sep >> value;
+		std::cout << date << std::endl;
 		if (checkDate(date) == false)
 			std::cerr << "Error: bad input => " << date << std::endl;
 		else if (value < 0)
