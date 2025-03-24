@@ -41,7 +41,7 @@ void BitcoinExchange::printMap() {
 
 bool BitcoinExchange::checkDate(std::string date) {
 	char sep1, sep2;
-	unsigned int year, month, day;
+	int year, month, day;
 	std::istringstream iss(date);
 	std::string creation = "2009-01-02";
 	std::time_t t = time(0);
@@ -124,38 +124,25 @@ bool BitcoinExchange::checkInput(std::string argv) {
 	std::ifstream input;
 	std::string line;
 	try {
-		if (argv.length() < 5
-			|| argv.find('.') == argv.npos
-			|| argv.substr(argv.find_last_of('.')) != ".txt") {
-			std::cerr << "Error: only '.txt' extension is valid." << std::endl;
-			return false;
-		}
 		input.open(argv.c_str(), std::ios::in);
 		if (!input.is_open() || input.fail())
 			throw BitcoinExchange::NoInputException();
 		input.close();
 	}
-	catch(BitcoinExchange::NoInputException &e) {
+	catch(std::exception &e) {
 		input.close();
 		std::cerr << "Error reading Input!" << std::endl;
-		return false;
-
-	}
-	catch(std::exception &e) {
-		std::cerr << e.what() << std::endl;
-		std::cerr << "Error in Input -> " << line << std::endl;
-		input.close();
 		return false;
 	}
 	return true;
 }
+
 double BitcoinExchange::getRate(std::string date) {
 	if (_DB.find(date) != _DB.end())
 		return _DB[date];
 	return -1;
-	
-
 }
+
 void BitcoinExchange::parseInput(std::string argv) {
 	BitcoinExchange& btc = BitcoinExchange::getInstance();
 	std::ifstream input;
@@ -181,11 +168,8 @@ void BitcoinExchange::parseInput(std::string argv) {
 			std::cerr << "Error: not a positive number." << std::endl;
 		else if (value > 1000)
 			std::cerr << "Error: too large a number." << std::endl;
-		else if (btc.getRate(date) != -1) {
-
+		else if (btc.getRate(date) != -1)
 			std::cout << date << " => " << value << " = " << value * btc.getRate(date) << std::endl;
-		}
-			//rate not found
 		else {
 			std::map<std::string, float>::iterator less = _DB.begin();
 			for (std::map<std::string, float>::iterator ite = less; ite != _DB.end(); ++ite) {
@@ -194,7 +178,7 @@ void BitcoinExchange::parseInput(std::string argv) {
 				else
 					break;
 			}
-			std::cout << date << " => " << value << " = " << value * less->second << std::endl;
+		std::cout << date << " => " << value << " = " << value * less->second << std::endl;
 		}
 
 	}
