@@ -42,7 +42,7 @@ bool PmergeMe::IsNumber(std::string str)
 }
 
 PmergeMe::PmergeMe(char** argv) : _level(1) , _size(0) {
-C	if (!this->parseInput(argv))
+	if (!this->parseInput(argv))
 		throw PmergeMe::InputException();
 }
 PmergeMe::PmergeMe(const PmergeMe& copy) : _vector(copy._vector), _deque(copy._deque), _level(copy._level), _size(copy._size)  { }
