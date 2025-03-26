@@ -1,4 +1,5 @@
 #pragma once
+#include <ctime>
 #include <string>
 #include <iostream>
 #include <deque>
@@ -12,23 +13,22 @@ class PmergeMe {
 	private:
 	std::vector<int> _vector;
 	std::deque<int> _deque;
+	std::deque<int> _original;
 	uint _level;
 	uint _size;
 	PmergeMe();
 	PmergeMe(const PmergeMe& copy);
 	PmergeMe& operator=(const PmergeMe& copy);
+	bool IsNumber(std::string str);
+	bool parseInput(char** argv);
+	void printall();
+	clock_t sortVector(void);
+	clock_t sortDeque(void);
 
 	public:
-	PmergeMe(char** argv);
+	void execute(void);
 	~PmergeMe();
-	bool IsNumber(std::string str);
-	std::vector<std::pair<int, int> > pairUp(std::vector<int> vec, uint level);
-	bool parseInput(char** argv);
-	void executeVector();
-	void executeDeque();
-	void printall();
-	std::vector<int> sortFordJohnson(std::vector<int> vec);
-
+	PmergeMe(char** argv);
 	class InputException :  public std::exception {
 		virtual const char* what() const throw();
 	};
@@ -38,5 +38,16 @@ template <typename T>
 void print(const T &container) {
 	for (typename T::const_iterator it = container.begin(); it != container.end(); it++)
 		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+template <typename T>
+bool isSorted(const T &container) {
+	for (typename T::const_iterator it = container.begin(); it != container.end(); it++) {
+		if (*it + 1 < *it) {
+			std::cout << *it << " is less than " << *it + 1 << std::endl;
+			return false;
+		}
+	}
+	return true;
 	std::cout << std::endl;
 }

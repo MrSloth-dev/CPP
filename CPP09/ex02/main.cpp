@@ -14,13 +14,12 @@
 
 int main(int argc, char*argv[]) {
 	try {
-
-	if (argc < 2) {
-		std::cerr <<"Error: Usage : ./PmergeMe <sequence> <of> <positive> <numbers> " << std::endl;
-		return 1;
-	}
-	PmergeMe pmm(argv);
-	pmm.executeVector();
+		if (argc < 2) {
+			std::cerr <<"Error: Usage : ./PmergeMe <sequence> <of> <positive> <numbers> " << std::endl;
+			return 1;
+		}
+		PmergeMe pmm(argv);
+		pmm.execute();
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;

@@ -1,32 +1,30 @@
 #include "PmergeMe.hpp"
-#include <algorithm>
+#include <ctime>
 #include <sys/types.h>
-#include <utility>
 #include <vector>
 
-/*
-class PmergeMe {
-	private:
-	std::vector<unsigned int> _vector;
-	std::deque<unsigned int> _deque;
-	PmergeMe();
-	public:
-	PmergeMe(char** argv);
-	PmergeMe(const PmergeMe& copy);
-	PmergeMe& operator=(const PmergeMe& copy);
-	~PmergeMe();
-	bool parseInput(char** argv);
-	void executeVector();
-	void executeDeque();
+////CANONICAL FORM
+PmergeMe::PmergeMe() {};
+PmergeMe::PmergeMe(char** argv) : _level(1) , _size(0) {
+	if (!this->parseInput(argv))
+		throw PmergeMe::InputException();
+	printall();
+}
 
-	class NoInput :  public std::exception {
-		virtual const char* what() const throw();
-	};
-	class ErrorException :  public std::exception {
-		virtual const char* what() const throw();
-	};
-}; */
+PmergeMe::PmergeMe(const PmergeMe& copy) : _vector(copy._vector), _deque(copy._deque), _level(copy._level), _size(copy._size)  { }
 
+PmergeMe& PmergeMe::operator=(const PmergeMe& copy) {
+	if (this != &copy) {
+		this->_vector = copy._vector;
+		this->_deque = copy._deque;
+		this->_level = copy._level;
+	}
+	return *this;
+}
+
+PmergeMe::~PmergeMe() {}
+
+//// PARSING
 bool PmergeMe::IsNumber(std::string str)
 {
 	if (str.empty())
@@ -41,31 +39,6 @@ bool PmergeMe::IsNumber(std::string str)
 	return true;
 }
 
-PmergeMe::PmergeMe(char** argv) : _level(1) , _size(0) {
-C	if (!this->parseInput(argv))
-		throw PmergeMe::InputException();
-}
-PmergeMe::PmergeMe(const PmergeMe& copy) : _vector(copy._vector), _deque(copy._deque), _level(copy._level), _size(copy._size)  { }
-
-PmergeMe& PmergeMe::operator=(const PmergeMe& copy) {
-	if (this != &copy) {
-		this->_vector = copy._vector;
-		this->_deque = copy._deque;
-		this->_level = copy._level;
-	}
-	return *this;
-}
-
-PmergeMe::~PmergeMe() {}
-
-void PmergeMe::printall() {
-	std::cout << "Vector" << std::endl;
-	print(_vector);
-	std::cout << "Deque" << std::endl;
-	print(_deque);
-
-}
-
 bool PmergeMe::parseInput(char** argv) {
 	++argv;
 	while (argv && *argv) {
@@ -77,6 +50,7 @@ bool PmergeMe::parseInput(char** argv) {
 				return false;
 			_vector.push_back(value);
 			_deque.push_back(value);
+			_original.push_back(value);
 			_size++;
 		}
 		argv++;
@@ -84,41 +58,52 @@ bool PmergeMe::parseInput(char** argv) {
 	return true;
 }
 
-std::vector<std::pair<int, int> > PmergeMe::pairUp(std::vector<int> vec, uint level) {
-	std::vector<std::pair<int, int> > temp;
-	(void)level;
-	for (uint i = 0; i < vec.size() - 1; i += 2) {
-		int a = vec[i];
-		int b = vec[i + 1];
-		if (a > b) std::swap(a,b);
-		temp.push_back(std::make_pair(a,b));
-		std::cout << "pair >>" << a << " " << b << std::endl;
+///EXECUTION
+clock_t PmergeMe::sortVector(void) {
+
+	if (_vector.size() < 2 || isSorted(_vector)) {
+		std::cout << "Sorted!" << std::endl;
+		return clock();
 	}
-	if (vec.size() % 2 == 1) temp.push_back(std::make_pair(vec.back(), -1));
-	return temp;
+	return clock();
+};
+
+clock_t PmergeMe::sortDeque(void) {
+
+	return clock();
+};
+
+void PmergeMe::execute(void) {
+	//timer start
+	clock_t startVector = clock();
+	//vector start
+	clock_t timeVector = this->sortVector() - startVector;
+	clock_t startDeque = clock();
+	clock_t timeDeque = this->sortDeque() - startDeque;
+
+
+	std::cout << "Vector time: " << timeVector << std::endl;
+	std::cout << "Deque time: "  << timeDeque  << std::endl;
+	
+	//timer end
+	//timer start
+	//deque start
+	//timer end
 }
 
-std::vector<int> PmergeMe::sortFordJohnson(std::vector<int> vec) {
-	if (vec.size() < 2) return vec;
-	std::vector<std::pair<int, int> > pairs = this->pairUp(vec, 1);
-	std::vector<int> mainS;
-	std::vector<int> pendent;
-	for (uint i = 0; i < pairs.size() - 1; i++) {
-		if (pairs[i].second != -1) {
-			mainS.push_back(pairs[i].second);
-			pendent.push_back(pairs[i].first);
-		}
-	}
-	if (mainS.size() > 1)
-		mainS = sortFordJohnson(mainS);
-	return vec;
 
-}
 
-void PmergeMe::executeVector() {
-	std::vector<int> temp = this->sortFordJohnson(_vector);
-	print(temp);
+
+//// HELPERS
+void PmergeMe::printall() {
+	std::cout << "Vector" << std::endl;
+	print(_vector);
+	std::cout << "Deque" << std::endl;
+	print(_deque);
+	std::cout << "Original" << std::endl;
+	print(_original);
 }
+//// EXCEPTIONS
 const char* PmergeMe::InputException::what() const throw() {
-	return "Error";
+	return "Invalid Input!";
 }
