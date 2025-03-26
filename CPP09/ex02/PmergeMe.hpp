@@ -42,12 +42,8 @@ void print(const T &container) {
 }
 template <typename T>
 bool isSorted(const T &container) {
-	for (typename T::const_iterator it = container.begin(); it != container.end(); it++) {
-		if (*it + 1 < *it) {
-			std::cout << *it << " is less than " << *it + 1 << std::endl;
+	for (typename T::const_iterator it = container.begin(); it != container.end() - 1; it++)
+		if (*(it + 1) < *it)
 			return false;
-		}
-	}
 	return true;
-	std::cout << std::endl;
 }

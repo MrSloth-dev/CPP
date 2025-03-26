@@ -1,6 +1,7 @@
 #include "PmergeMe.hpp"
 #include <ctime>
 #include <sys/types.h>
+#include <utility>
 #include <vector>
 
 ////CANONICAL FORM
@@ -65,6 +66,20 @@ clock_t PmergeMe::sortVector(void) {
 		std::cout << "Sorted!" << std::endl;
 		return clock();
 	}
+	int oddElement = -1;
+	if (_vector.size() % 2 == 1){
+		oddElement = _vector.back();
+		_vector.pop_back();
+	}
+	std::vector<std::pair<int, int> > _pairs;
+	for (std::vector<int>::iterator ite = _vector.begin(); ite != _vector.end(); ite += 2)
+		_pairs.push_back(std::make_pair(*ite, *(ite + 1)));
+
+	for (std::vector<std::pair<int, int> >::iterator itep = _pairs.begin(); itep != _pairs.end(); itep++)
+		if (itep->first > itep->second)
+			std::swap(itep->first, itep->second);
+	if (_vector.size() % 2 == 1)
+		_pairs.push_back(std::make_pair(oddElement, -1));
 	return clock();
 };
 
