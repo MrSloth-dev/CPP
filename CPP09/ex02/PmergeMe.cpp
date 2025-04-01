@@ -60,6 +60,54 @@ bool PmergeMe::parseInput(char** argv) {
 }
 
 ///EXECUTION
+void insertPair(std::pair<int, int> temp, std::vector<std::pair<int, int> > &pairs, int index) {
+	if (index < 0)
+		pairs.insert(pairs.begin(),temp);
+	if (temp.first > pairs[index].first)
+		pairs.insert(pairs.begin() + (index + 1), temp);
+	else
+		insertPair(temp, pairs, index - 1);
+}
+
+void sortPairs(std::vector<std::pair<int, int> > &pairs, int index) {
+	if (index < 1)
+		return ;
+	sortPairs(pairs, index - 1);
+	std::pair<int, int> temp = pairs[index];
+	pairs.erase(pairs.begin() + index);
+	insertPair(temp, pairs, index - 1);
+}
+
+std::vector<int> createMain(std::vector<std::pair<int, int> > pairs) {
+	std::vector<int> temp;
+	for (std::vector<std::pair<int, int> >::iterator ite = pairs.begin(); ite != pairs.end(); ite++) {
+		if (ite != pairs.begin())
+			temp.push_back(ite->first);
+		else {
+			temp.push_back(ite->second);
+			temp.push_back(ite->first);
+		}
+	}
+	return temp;
+}
+
+std::vector<int> returnJacob(std::vector<std::pair<int, int> > &pairs) {
+	std::vector<int> result;
+	int max_index = 0;
+	int sizePairs = pairs.size();
+	int JacobIndexes[] = {0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525};
+	while (sizePairs > JacobIndexes[max_index])
+		max_index++;
+	for (int i = 0; i < sizePairs; i++) {
+		int curr = JacobIndexes[i + 1];
+		if (sizePairs < curr)
+			curr = sizePairs;
+		while(curr > JacobIndexes[i])
+			result.push_back(curr--);
+	}
+	return result;
+}
+
 clock_t PmergeMe::sortVector(void) {
 
 	if (_vector.size() < 2 || isSorted(_vector)) {
@@ -71,15 +119,30 @@ clock_t PmergeMe::sortVector(void) {
 		oddElement = _vector.back();
 		_vector.pop_back();
 	}
-	std::vector<std::pair<int, int> > _pairs;
-	for (std::vector<int>::iterator ite = _vector.begin(); ite != _vector.end(); ite += 2)
-		_pairs.push_back(std::make_pair(*ite, *(ite + 1)));
+	std::vector<std::pair<int, int> > pairs;
 
-	for (std::vector<std::pair<int, int> >::iterator itep = _pairs.begin(); itep != _pairs.end(); itep++)
-		if (itep->first > itep->second)
+	for (std::vector<int>::iterator ite = _vector.begin(); ite != _vector.end(); ite += 2)
+		pairs.push_back(std::make_pair(*ite, *(ite + 1)));
+
+	for (std::vector<std::pair<int, int> >::iterator itep = pairs.begin(); itep != pairs.end(); itep++)
+		if (itep->first < itep->second)
 			std::swap(itep->first, itep->second);
+
+	sortPairs(pairs, pairs.size() - 1);
+	std::vector<int> result = createMain(pairs);
+	std::vector<int> jacobSeq = returnJacob(pairs);
 	if (_vector.size() % 2 == 1)
-		_pairs.push_back(std::make_pair(oddElement, -1));
+		pairs.push_back(std::make_pair(-1 ,oddElement));
+	for (std::vector<int>::iterator jacobIte = jacobSeq.begin(); jacobIte != jacobSeq.end(); jacobIte++) {
+		std::vector<int>::iterator resultIte = result.begin();
+		while(*resultIte < pairs[*jacobIte - 1].second)
+			resultIte++;
+		result.insert(resultIte,pairs[*jacobIte - 1].second);
+	}
+	std::cout << "Result" << std::endl;
+	print(result);
+	return clock();
+
 	return clock();
 };
 
@@ -99,11 +162,6 @@ void PmergeMe::execute(void) {
 
 	std::cout << "Vector time: " << timeVector << std::endl;
 	std::cout << "Deque time: "  << timeDeque  << std::endl;
-	
-	//timer end
-	//timer start
-	//deque start
-	//timer end
 }
 
 
