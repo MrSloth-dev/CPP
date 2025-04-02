@@ -57,7 +57,7 @@ vgdb : re
 
 asan : fclean
 	$(CC) $(CFLAGS) $(ASANFLAGS) $(SRCS) -o $(NAME)
-	./$(NAME) 0 1 2 3 4 5
+	shuf -i 1-11 | xargs ./$(NAME)
 
 va : re
 	valgrind -q --leak-check=full --show-leak-kinds=all ./$(NAME)

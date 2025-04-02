@@ -5,6 +5,7 @@
 #include <deque>
 #include <vector>
 #include <cstdlib>
+#include <cmath>
 #include <sstream>
 #include <sys/types.h>
 
@@ -43,7 +44,7 @@ void print(const T &container) {
 template <typename T>
 bool isSorted(const T &container) {
 	for (typename T::const_iterator it = container.begin(); it != container.end() - 1; it++)
-		if (*(it + 1) < *it)
+		if (*it > *(it + 1) )
 			return false;
 	return true;
 }
