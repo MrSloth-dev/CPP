@@ -1,4 +1,5 @@
 #include "PmergeMe.hpp"
+#include <algorithm>
 #include <ctime>
 #include <sys/types.h>
 #include <utility>
@@ -81,11 +82,13 @@ void sortPairs(std::vector<std::pair<int, int> > &pairs, int index) {
 std::vector<int> createMain(std::vector<std::pair<int, int> > pairs) {
 	std::vector<int> temp;
 	for (std::vector<std::pair<int, int> >::iterator ite = pairs.begin(); ite != pairs.end(); ite++) {
-		if (ite != pairs.begin())
-			temp.push_back(ite->first);
-		else {
+		if (ite == pairs.begin()) {
+			temp.push_back(ite->second);
 			temp.push_back(ite->first);
 			// temp.push_back(ite->second);
+		}
+		else {
+			temp.push_back(ite->first);
 		}
 	}
 	return temp;
@@ -95,7 +98,7 @@ std::vector<int> returnJacob(std::vector<std::pair<int, int> > &pairs) {
 	std::vector<int> result;
 	int max_index = 0;
 	int sizePairs = pairs.size();
-	int JacobIndexes[] = {0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525};
+	int JacobIndexes[] = {1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525};
 	while (sizePairs >= JacobIndexes[max_index])
 		max_index++;
 	for (int i = 0; i < sizePairs; i++) {
@@ -128,8 +131,7 @@ clock_t PmergeMe::sortVector(void) {
 	for (std::vector<std::pair<int, int> >::iterator itep = pairs.begin(); itep != pairs.end(); itep++)
 		if (itep->first < itep->second)
 			std::swap(itep->first, itep->second);
-
-	sortPairs(pairs, pairs.size() - 1);
+	sortPairs(pairs, pairs.size()- 1);
 	std::vector<int> result = createMain(pairs);
 	std::vector<int> jacobSeq = returnJacob(pairs);
 	if (isOddSize)
@@ -143,8 +145,9 @@ clock_t PmergeMe::sortVector(void) {
 	}
 	std::cout << "Result" << std::endl;
 	print(result);
-	return clock();
-
+	std::cout << "Should be" << std::endl;
+	std::sort(_original.begin(), _original.end());
+	print(_original);
 	return clock();
 };
 
@@ -158,12 +161,12 @@ void PmergeMe::execute(void) {
 	clock_t startVector = clock();
 	//vector start
 	clock_t timeVector = this->sortVector() - startVector;
-	clock_t startDeque = clock();
-	clock_t timeDeque = this->sortDeque() - startDeque;
+	// clock_t startDeque = clock();
+	// clock_t timeDeque = this->sortDeque() - startDeque;
 
 
 	std::cout << "Vector time: " << timeVector << std::endl;
-	std::cout << "Deque time: "  << timeDeque  << std::endl;
+	// std::cout << "Deque time: "  << timeDeque  << std::endl;
 }
 
 
