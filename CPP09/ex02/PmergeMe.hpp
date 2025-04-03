@@ -25,6 +25,7 @@ class PmergeMe {
 	void printall();
 	clock_t sortVector(void);
 	clock_t sortDeque(void);
+  void displayTime(std::string typeContainer, double time);
 
 	public:
 	void execute(void);
