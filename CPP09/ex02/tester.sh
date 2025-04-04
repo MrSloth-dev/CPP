@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+set -e
+
 ARGC=$#
 NUMTEST=100
 
@@ -6,18 +9,20 @@ if [[ $ARGC -lt 3 ]]; then
 	echo -e "Usage ./tester.sh <min-max> <count> <number_of_tests>(optional)"
 	exit 1
 fi
-if [[ $ARGC -gt 3 ]]; then
+if [[ $ARGC -gt 4 ]]; then
 	echo -e "Usage ./tester.sh <min-max> <count> <number_of_tests>(optional)"
+	exit 2
+fi
+if [[ $ARGC -eq 4 ]]; then
 	NUMTEST=$3
 fi
-
 if [ ! -f "./PmergeMe" ]; then
 	echo -e "No binary 'PmergeMe' file found"
-	exit 2
+	exit 3
 fi
 if [ ! -f "./checker" ]; then
 	echo -e "No binary 'checker' file found, please run 'make checker'"
-	exit 2
+	exit 4
 fi
 
 echo "Running.. $NUMTEST tests"
