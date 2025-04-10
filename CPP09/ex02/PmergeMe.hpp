@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/04 10:26:32 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/04/04 10:28:07 by joao-pol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PMERGEME_HPP
+#define PMERGEME_HPP
 #pragma once
 #include <ctime>
 #include <string>
 #include <iostream>
 #include <deque>
 #include <vector>
-#include <cstdlib>
 #include <cmath>
-#include <sstream>
-#include <sys/types.h>
 
 
 class PmergeMe {
@@ -49,3 +60,4 @@ bool isSorted(const T &container) {
 			return false;
 	return true;
 }
+#endif //PMERGEME_HPP

@@ -5,7 +5,6 @@
 #include <sys/types.h>
 #include <utility>
 #include <vector>
-#include <stdio.h>
 
 ////CANONICAL FORM
 PmergeMe::PmergeMe() {};
