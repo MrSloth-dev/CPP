@@ -1,5 +1,6 @@
 #include "PmergeMe.hpp"
 #include <algorithm>
+#include <cstddef>
 #include <ctime>
 #include <iomanip>
 #include <sys/types.h>
@@ -80,24 +81,25 @@ void sortPairsVector(std::vector<std::pair<int, int> > &pairs, int index) {
 }
 
 std::vector<int> createMainVector(std::vector<std::pair<int, int> > pairs) {
-	std::vector<int> temp;
-	for (std::vector<std::pair<int, int> >::iterator ite = pairs.begin(); ite < pairs.end(); ite++) {
-			temp.push_back(ite->first);
+	std::vector<int> main;
+	main.push_back(pairs[0].second);
+	for (size_t i = 0; i < pairs.size(); i++) {
+			main.push_back(pairs[i].first);
 	}
-	return temp;
+	return main;
 }
 long jacobIndexes(int i) {return round((pow(2, i + 1) - pow(-1, i)) / 3);}
 
-std::vector<int> JacobVector(std::vector<std::pair<int, int> > &pairs) {
+std::vector<int> JacobVector(int pendSize) {
 	std::vector<int> result;
 	int max_index = 0;
-	int sizePairs = pairs.size();
-	while (sizePairs > jacobIndexes(max_index))
+	while (pendSize > jacobIndexes(max_index))
 		max_index++;
 	for (int i = 0; i < max_index; i++) {
 		int curr = jacobIndexes(i + 1);
-		if (sizePairs < curr)
-			curr = sizePairs;
+		if (pendSize < curr)
+			curr = pendSize;
+
 		while(curr > jacobIndexes(i)) {
 			result.push_back(curr--);
 			if (curr <= 0)
@@ -119,31 +121,40 @@ clock_t PmergeMe::sortVector(void) {
 		oddElement = _vector.back();
 		_vector.pop_back();
 	}
-	std::vector<std::pair<int, int> > pairs;
 
+	std::vector<std::pair<int, int> > pairs;
 	for (std::vector<int>::iterator ite = _vector.begin(); ite != _vector.end(); ite += 2)
 		pairs.push_back(std::make_pair(*ite, *(ite + 1)));
 
 	for (std::vector<std::pair<int, int> >::iterator itep = pairs.begin(); itep != pairs.end(); itep++)
 		if (itep->first < itep->second)
 			std::swap(itep->first, itep->second);
+
 	sortPairsVector(pairs, pairs.size()- 1);
-	std::vector<int> result = createMainVector(pairs);
+
+	std::vector<int> main = createMainVector(pairs);
+	std::vector<int> pend;
+	for (size_t i = 1; i < pairs.size(); i++)
+		pend.push_back(pairs[i].second);
 	if (isOddSize)
-		pairs.push_back(std::make_pair(-1 ,oddElement));
-	std::vector<int> jacobSeq = JacobVector(pairs);
-	std::vector<int>::iterator resultIte = result.begin();
-	for (std::vector<int>::iterator jacobIte = jacobSeq.begin(); jacobIte != jacobSeq.end(); jacobIte++) {
-		resultIte = result.begin();
-		while(resultIte < result.end() && *resultIte < pairs[*jacobIte - 1].second) {
-			resultIte++;
+		pend.push_back(oddElement);
+	std::vector<int> jacobSeq = JacobVector(pend.size());
+	//inserting with binary search
+	for (size_t i = 0; i < jacobSeq.size(); i++) {
+		size_t pendIndex = jacobSeq[i] - 1;
+		if (pendIndex >= 0 && pendIndex < pend.size()) {
+			int elementToInsert = pend[pendIndex];
+			std::vector<int>::iterator insertPos = std::upper_bound(
+				main.begin(),
+				main.end(),
+				elementToInsert
+			);
+			main.insert(insertPos, elementToInsert);
 		}
-		result.insert(resultIte,pairs[*jacobIte - 1].second);
 	}
-	_vector = result;
+	_vector = main;
 	return clock();
 };
-
 ///EXECUTION Deque
 void insertPairDeque(std::pair<int, int> temp, std::deque<std::pair<int, int> > &pairs, int index) {
 	if (index < 0)
@@ -164,23 +175,24 @@ void sortPairsDeque(std::deque<std::pair<int, int> > &pairs, int index) {
 }
 
 std::deque<int> createMainDeque(std::deque<std::pair<int, int> > pairs) {
-	std::deque<int> temp;
-	for (std::deque<std::pair<int, int> >::iterator ite = pairs.begin(); ite != pairs.end(); ite++) {
-			temp.push_back(ite->first);
+	std::deque<int> main;
+	main.push_back(pairs[0].second);
+	for (size_t i = 0; i < pairs.size(); i++) {
+			main.push_back(pairs[i].first);
 	}
-	return temp;
+	return main;
 }
 
-std::deque<int> JacobDeque(std::deque<std::pair<int, int> > &pairs) {
+std::deque<int> JacobDeque(int pendSize) {
 	std::deque<int> result;
 	int max_index = 0;
-	int sizePairs = pairs.size();
-	while (sizePairs > jacobIndexes(max_index))
+	while (pendSize > jacobIndexes(max_index))
 		max_index++;
 	for (int i = 0; i < max_index; i++) {
 		int curr = jacobIndexes(i + 1);
-		if (sizePairs < curr)
-			curr = sizePairs;
+		if (pendSize < curr)
+			curr = pendSize;
+
 		while(curr > jacobIndexes(i)) {
 			result.push_back(curr--);
 			if (curr <= 0)
@@ -193,7 +205,7 @@ std::deque<int> JacobDeque(std::deque<std::pair<int, int> > &pairs) {
 clock_t PmergeMe::sortDeque(void) {
 
 	if (_deque.size() < 2 || isSorted(_deque)) {
-		std::cout << "Sorted!" << std::endl;
+		std::cout << "No operation needed!" << std::endl;
 		return clock();
 	}
 	int oddElement = -1;
@@ -202,27 +214,38 @@ clock_t PmergeMe::sortDeque(void) {
 		oddElement = _deque.back();
 		_deque.pop_back();
 	}
-	std::deque<std::pair<int, int> > pairs;
 
-	for (std::deque<int>::iterator ite = _deque.begin(); ite < _deque.end(); ite += 2)
+	std::deque<std::pair<int, int> > pairs;
+	for (std::deque<int>::iterator ite = _deque.begin(); ite != _deque.end(); ite += 2)
 		pairs.push_back(std::make_pair(*ite, *(ite + 1)));
 
-	for (std::deque<std::pair<int, int> >::iterator itep = pairs.begin(); itep < pairs.end(); itep++)
+	for (std::deque<std::pair<int, int> >::iterator itep = pairs.begin(); itep != pairs.end(); itep++)
 		if (itep->first < itep->second)
 			std::swap(itep->first, itep->second);
-	sortPairsDeque(pairs, pairs.size()- 1);
-	std::deque<int> result = createMainDeque(pairs);
-	if (isOddSize)
-		pairs.push_back(std::make_pair(-1 ,oddElement));
-	std::deque<int> jacobSeq = JacobDeque(pairs);
 
-	for (std::deque<int>::iterator jacobIte = jacobSeq.begin(); jacobIte < jacobSeq.end(); jacobIte++) {
-		std::deque<int>::iterator resultIte = result.begin();
-		while(resultIte < result.end() && *resultIte < pairs[*jacobIte - 1].second)
-			resultIte++;
-		result.insert(resultIte,pairs[*jacobIte - 1].second);
+	sortPairsDeque(pairs, pairs.size()- 1);
+
+	std::deque<int> main = createMainDeque(pairs);
+	std::deque<int> pend;
+	for (size_t i = 1; i < pairs.size(); i++)
+		pend.push_back(pairs[i].second);
+	if (isOddSize)
+		pend.push_back(oddElement);
+	std::deque<int> jacobSeq = JacobDeque(pend.size());
+	//inserting with binary search
+	for (size_t i = 0; i < jacobSeq.size(); i++) {
+		size_t pendIndex = jacobSeq[i] - 1;
+		if (pendIndex >= 0 && pendIndex < pend.size()) {
+			int elementToInsert = pend[pendIndex];
+			std::deque<int>::iterator insertPos = std::upper_bound(
+				main.begin(),
+				main.end(),
+				elementToInsert
+			);
+			main.insert(insertPos, elementToInsert);
+		}
 	}
-	_deque = result;
+	_deque = main;
 	return clock();
 };
 
@@ -240,15 +263,12 @@ void PmergeMe::execute(void) {
 
 	displayTime("vector", timeVector);
 	displayTime("deque", timeDeque);
-// 	std::cout << "Time to process a range of" << _original.size() << "elements with std::vector: "0.00031 us
-// "Vector time: " << std::fixed << std::setprecision(6) << timeVector << "us" << std::endl;
-// 	std::cout << "Deque time: "  << std::fixed << std::setprecision(6) << timeDeque << "s" << std::endl;
 }
 
 //// HELPERS
 void PmergeMe::displayTime(std::string typeContainer, double time) {
-	std::cout << std::fixed << std::setprecision(6) << "Time to process a range of" << _original.size()
-	<< "elements with std::"<< typeContainer<< ": " << time << " us " << std::endl;
+	std::cout << std::fixed << std::setprecision(6) << "Time to process a range of " << _original.size()
+	<< " elements with std::"<< typeContainer<< ": " << time << " s " << std::endl;
 }
 void PmergeMe::printall() {
 	std::cout << "Vector" << std::endl;

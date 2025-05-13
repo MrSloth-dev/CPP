@@ -27,7 +27,7 @@ int main() {
   for (std::vector<int>::iterator ite = original.begin(); ite < original.end(); ite++)
     std::cout << *ite << " ";
   std::cout << std::endl;
-  std::cout << "Sorted After" << std::endl;
+  std::cout << "Original After" << std::endl;
   for (std::vector<int>::iterator ite = sorted.begin(); ite < sorted.end(); ite++)
     std::cout << *ite << " ";
   std::cout << std::endl;
