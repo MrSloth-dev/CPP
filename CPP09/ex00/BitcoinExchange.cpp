@@ -4,12 +4,9 @@
 #include <cctype>
 
 BitcoinExchange& BitcoinExchange::getInstance() {
-	if (_instance == NULL)
-		_instance = new BitcoinExchange();
-	return *_instance;
+	static BitcoinExchange _instance;
+	return _instance;
 }
-
-BitcoinExchange* BitcoinExchange::_instance = NULL;
 
 BitcoinExchange::BitcoinExchange() {
 	if (!this->checkDatabase())
@@ -31,7 +28,6 @@ BitcoinExchange::BitcoinExchange() {
 }
 
 BitcoinExchange::~BitcoinExchange() {
-	delete _instance;
 }
 
 void BitcoinExchange::printMap() {
