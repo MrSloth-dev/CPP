@@ -54,7 +54,7 @@ long	Stoi(std::string str)
 int main(int argc, char*argv[]) {
 	std::stack<float> stck;
 	if (argc != 2) {
-		std::cerr <<"Error: Usage : ./RPN 'operation'" << std::endl;
+		std::cerr <<"Error: Usage : ./RPN \"operation\"" << std::endl;
 		return 1;
 	}
 	std::istringstream iss(argv[1]);

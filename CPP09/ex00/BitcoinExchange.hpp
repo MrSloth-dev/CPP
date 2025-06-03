@@ -10,6 +10,7 @@
 
 class BitcoinExchange {
 	private:
+	static BitcoinExchange* _instance;
 	std::map<std::string, float> _DB;
 	BitcoinExchange(const BitcoinExchange& copy);
 	BitcoinExchange& operator=(const BitcoinExchange& copy);

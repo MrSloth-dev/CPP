@@ -39,6 +39,6 @@ asan : fclean
 	./$(NAME) ./annexes/input.txt
 
 va : re
-	valgrind -q --leak-check=full --show-leak-kinds=all ./$(NAME) ./annexes/input.txt
+	valgrind -q --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 .PHONY : all fclean re
