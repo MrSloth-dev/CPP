@@ -268,7 +268,7 @@ void PmergeMe::execute(void) {
 //// HELPERS
 void PmergeMe::displayTime(std::string typeContainer, double time) {
 	std::cout << std::fixed << std::setprecision(6) << "Time to process a range of " << _original.size()
-	<< " elements with std::"<< typeContainer<< ": " << time << " s " << std::endl;
+	<< " elements with std::"<< typeContainer<< ": " << time * 1e3 << " ms " << std::endl;
 }
 void PmergeMe::printall() {
 	std::cout << "Vector" << std::endl;
