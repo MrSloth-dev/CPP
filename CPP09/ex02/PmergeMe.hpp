@@ -26,7 +26,6 @@ class PmergeMe {
 	std::vector<int> _vector;
 	std::deque<int> _deque;
 	std::deque<int> _original;
-	uint _level;
 	uint _size;
 	PmergeMe();
 	PmergeMe(const PmergeMe& copy);

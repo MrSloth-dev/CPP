@@ -9,18 +9,19 @@
 
 ////CANONICAL FORM
 PmergeMe::PmergeMe() {};
-PmergeMe::PmergeMe(char** argv) : _level(1) , _size(0) {
+PmergeMe::PmergeMe(char** argv) : _size(0) {
 	if (!this->parseInput(argv))
 		throw PmergeMe::InputException();
 }
 
-PmergeMe::PmergeMe(const PmergeMe& copy) : _vector(copy._vector), _deque(copy._deque), _level(copy._level), _size(copy._size)  { }
+PmergeMe::PmergeMe(const PmergeMe& copy) : _vector(copy._vector), _deque(copy._deque), _original(copy._original), _size(copy._size)  { }
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& copy) {
 	if (this != &copy) {
 		this->_vector = copy._vector;
 		this->_deque = copy._deque;
-		this->_level = copy._level;
+		this->_size = copy._size;
+		this->_original = copy._original;
 	}
 	return *this;
 }
@@ -88,7 +89,10 @@ std::vector<int> createMainVector(std::vector<std::pair<int, int> > pairs) {
 	}
 	return main;
 }
-long jacobIndexes(int i) {return round((pow(2, i + 1) - pow(-1, i)) / 3);}
+long jacobIndexes(int i) {
+	if (i == 0) return 0;
+	if (i == 1) return 1;
+	return round((pow(2, i + 1) - pow(-1, i)) / 3);}
 
 std::vector<int> JacobVector(int pendSize) {
 	std::vector<int> result;
